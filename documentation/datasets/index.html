@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#knowledge-distillation-dataset" class="md-skip">
+        <a href="#constrastive-dataset" class="md-skip">
           Skip to content
         </a>
       
@@ -448,30 +448,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#knowledge-distillation-dataset" class="md-nav__link">
-    <span class="md-ellipsis">
-      Knowledge distillation dataset
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Knowledge distillation dataset">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#knowledge-distillation-dataset-from-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      Knowledge distillation dataset from list
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#constrastive-dataset" class="md-nav__link">
     <span class="md-ellipsis">
       Constrastive dataset
@@ -503,6 +479,39 @@
   <a href="#loading-a-contrastive-dataset-from-a-local-parquet-file" class="md-nav__link">
     <span class="md-ellipsis">
       Loading a contrastive dataset from a local parquet file
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#knowledge-distillation-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge distillation dataset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Knowledge distillation dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-a-pre-built-knowledge-distillation-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading a pre-built knowledge distillation dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#knowledge-distillation-dataset-from-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge distillation dataset from list
     </span>
   </a>
   
@@ -704,30 +713,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#knowledge-distillation-dataset" class="md-nav__link">
-    <span class="md-ellipsis">
-      Knowledge distillation dataset
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Knowledge distillation dataset">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#knowledge-distillation-dataset-from-list" class="md-nav__link">
-    <span class="md-ellipsis">
-      Knowledge distillation dataset from list
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#constrastive-dataset" class="md-nav__link">
     <span class="md-ellipsis">
       Constrastive dataset
@@ -769,6 +754,39 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#knowledge-distillation-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge distillation dataset
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Knowledge distillation dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#loading-a-pre-built-knowledge-distillation-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading a pre-built knowledge distillation dataset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#knowledge-distillation-dataset-from-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge distillation dataset from list
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -786,31 +804,63 @@
 
   <h1>Datasets</h1>
 
-<p>PyLate models are designed to be compatible with Hugging Face datasets, facilitating seamless integration for tasks such as knowledge distillation and contrastive model training. Below are examples illustrating how to load and prepare datasets for these specific training objectives.</p>
-<h2 id="knowledge-distillation-dataset">Knowledge distillation dataset<a class="headerlink" href="#knowledge-distillation-dataset" title="Permanent link">&para;</a></h2>
-<p>For fine-tuning a model using knowledge distillation loss, three distinct dataset files are required: train, queries, and documents. Each file contains unique and complementary information necessary for the distillation process.</p>
-<p>A sample dataset for knowledge distillation is available here: <a href="https://huggingface.co/datasets/lightonai/lighton-ms-marco-mini">MS Marco Mini Dataset</a>.</p>
+<p>PyLate is designed to be compatible with Hugging Face datasets, facilitating seamless integration for tasks such as knowledge distillation and contrastive model training. Below are examples illustrating how to load and prepare datasets for these specific training objectives.</p>
+<h2 id="constrastive-dataset">Constrastive dataset<a class="headerlink" href="#constrastive-dataset" title="Permanent link">&para;</a></h2>
+<p>Contrastive training involves datasets that contain a query, a positive document (relevant to the query), and a negative document (irrelevant to the query). This the standard triplet format used by Sentence Transformers and so PyLate contrastive training is <strong>compatible with every existing triplet datasets.</strong></p>
+<h3 id="loading-a-pre-built-contrastive-dataset">Loading a pre-built contrastive dataset<a class="headerlink" href="#loading-a-pre-built-contrastive-dataset" title="Permanent link">&para;</a></h3>
+<p>You can directly download an existing contrastive dataset from Hugging Face's hub, such as the <a href="https://huggingface.co/datasets/sentence-transformers/msmarco-bm25">msmarco-bm25 triplet dataset</a>.</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
 
-<span class="n">train</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
-    <span class="s2">&quot;lightonai/lighton-ms-marco-mini&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;train&quot;</span><span class="p">,</span>
-    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;sentence-transformers/msmarco-bm25&quot;</span><span class="p">,</span> <span class="s2">&quot;triplet&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
 
-<span class="n">queries</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
-    <span class="s2">&quot;lightonai/lighton-ms-marco-mini&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;queries&quot;</span><span class="p">,</span>
-    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">documents</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
-    <span class="s2">&quot;lightonai/lighton-ms-marco-mini&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;documents&quot;</span><span class="p">,</span>
-    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 </code></pre></div>
-<p>Where:</p>
+<p>Then we can shuffle the dataset:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</code></pre></div>
+<p>And select a subset of the dataset if needed:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="creating-a-contrastive-dataset-from-list">Creating a contrastive dataset from list<a class="headerlink" href="#creating-a-contrastive-dataset-from-list" title="Permanent link">&para;</a></h3>
+<p>If you want to create a custom contrastive dataset, you can do so by manually specifying the query, positive, and negative samples.</p>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="s2">&quot;example positive document 1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="s2">&quot;example negative document 1&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="s2">&quot;example positive document 2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="s2">&quot;example negative document 2&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="s2">&quot;example positive document 3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="s2">&quot;example negative document 3&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+
+<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="loading-a-contrastive-dataset-from-a-local-parquet-file">Loading a contrastive dataset from a local parquet file<a class="headerlink" href="#loading-a-contrastive-dataset-from-a-local-parquet-file" title="Permanent link">&para;</a></h3>
+<p>To load a local dataset stored in a Parquet file:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span> 
+    <span class="n">data_files</span><span class="o">=</span><span class="s2">&quot;dataset.parquet&quot;</span><span class="p">,</span> 
+    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span>
+<span class="p">)</span>
+
+<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="knowledge-distillation-dataset">Knowledge distillation dataset<a class="headerlink" href="#knowledge-distillation-dataset" title="Permanent link">&para;</a></h2>
+<p>For fine-tuning a model using knowledge distillation loss, three distinct dataset files are required: train, queries, and documents. Each file contains unique and complementary information necessary for the distillation process:</p>
 <ul>
 <li><code>train</code>: Contains three columns: <code>['query_id', 'document_ids', 'scores']</code><ul>
 <li><code>query_id</code> refers to the query identifier.</li>
@@ -849,7 +899,7 @@
 <li><code>queries</code>: Contains two columns: <code>['query_id', 'text']</code></li>
 </ul>
 <p>Example entry:</p>
-<div class="language-python highlight"><pre><span></span><code><span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">749480</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;what is function of magnesium in human body&quot;</span><span class="p">}</span>
+<div class="language-python highlight"><pre><span></span><code><span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">749480</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 1&quot;</span><span class="p">}</span>
 </code></pre></div>
 <ul>
 <li><code>documents</code>: contains two columns: <code>['document_ids', 'text']</code></li>
@@ -857,11 +907,34 @@
 <p>Example entry:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="p">{</span>
     <span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">136062</span><span class="p">,</span>
-    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 1&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
+<h3 id="loading-a-pre-built-knowledge-distillation-dataset">Loading a pre-built knowledge distillation dataset<a class="headerlink" href="#loading-a-pre-built-knowledge-distillation-dataset" title="Permanent link">&para;</a></h3>
+<p>You can directly download an existing knowledge distillation dataset from Hugging Face's hub, such as the <a href="https://huggingface.co/datasets/lightonai/ms-marco-en-bge">MS MARCO dataset with BGE M3 scores</a>.
+Simply load the different files by giving the respective names to the <code>load_dataset</code> function:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+
+<span class="n">train</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;lightonai/ms-marco-en-bge&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;train&quot;</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">queries</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;lightonai/ms-marco-en-bge&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;queries&quot;</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">documents</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
+    <span class="s2">&quot;lightonai/ms-marco-en-bge&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;documents&quot;</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
 <h3 id="knowledge-distillation-dataset-from-list">Knowledge distillation dataset from list<a class="headerlink" href="#knowledge-distillation-dataset-from-list" title="Permanent link">&para;</a></h3>
-<p>You can also create custom datasets from list in Python. This example demonstrates how to build and split the <code>train</code>, <code>queries</code>, and <code>documents</code> datasets</p>
+<p>You can also create custom datasets from list in Python. This example demonstrates how to build the <code>train</code>, <code>queries</code>, and <code>documents</code> datasets</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
@@ -916,84 +989,25 @@
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
 
-<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-</code></pre></div>
-<p>Queries and Documents Dataset Example</p>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
-
 <span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">6862419</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">335116</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">339186</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">7509316</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">7361291</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">7416534</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">5789936</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">5645247</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Document text&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">6862419</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 1&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">335116</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 2&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">339186</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 3&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">7509316</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 4&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">7361291</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 5&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">7416534</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 6&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">5789936</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 7&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">5645247</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example document 8&quot;</span><span class="p">},</span>
 <span class="p">]</span>
 
 <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">749480</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;what is function of magnesium in human body&quot;</span><span class="p">},</span>
-    <span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">54528</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;what is the capital of France&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">749480</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 1&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">54528</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 2&quot;</span><span class="p">},</span>
 <span class="p">]</span>
 
 <span class="n">documents</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
 
 <span class="n">queries</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">queries</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="constrastive-dataset">Constrastive dataset<a class="headerlink" href="#constrastive-dataset" title="Permanent link">&para;</a></h2>
-<p>Contrastive training involves datasets that contain a query, a positive document (relevant to the query), and a negative document (irrelevant to the query). The model is trained to maximize the similarity between the query and the positive document while minimizing the similarity with the negative document.</p>
-<h3 id="loading-a-pre-built-contrastive-dataset">Loading a pre-built contrastive dataset<a class="headerlink" href="#loading-a-pre-built-contrastive-dataset" title="Permanent link">&para;</a></h3>
-<p>You can directly download an existing contrastive dataset from Hugging Face's hub, such as the <a href="https://huggingface.co/datasets/sentence-transformers/msmarco-bm25">msmarco-bm25 triplet dataset</a>.</p>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
-
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;sentence-transformers/msmarco-bm25&quot;</span><span class="p">,</span> <span class="s2">&quot;triplet&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
-
-<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
-</code></pre></div>
-<p>Then we can shuffle the dataset:</p>
-<div class="language-python highlight"><pre><span></span><code><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</code></pre></div>
-<p>And select a subset of the dataset if needed:</p>
-<div class="language-python highlight"><pre><span></span><code><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10_000</span><span class="p">))</span>
-</code></pre></div>
-<h3 id="creating-a-contrastive-dataset-from-list">Creating a contrastive dataset from list<a class="headerlink" href="#creating-a-contrastive-dataset-from-list" title="Permanent link">&para;</a></h3>
-<p>If you want to create a custom contrastive dataset, you can do so by manually specifying the query, positive, and negative samples.</p>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
-
-<span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="s2">&quot;example positive document 1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="s2">&quot;example negative document 1&quot;</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="s2">&quot;example positive document 2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="s2">&quot;example negative document 2&quot;</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="s2">&quot;example positive document 3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="s2">&quot;example negative document 3&quot;</span><span class="p">,</span>
-    <span class="p">},</span>
-<span class="p">]</span>
-
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
-
-<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="loading-a-contrastive-dataset-from-a-local-parquet-file">Loading a contrastive dataset from a local parquet file<a class="headerlink" href="#loading-a-contrastive-dataset-from-a-local-parquet-file" title="Permanent link">&para;</a></h3>
-<p>To load a local dataset stored in a Parquet file:</p>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
-
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
-    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;parquet&quot;</span><span class="p">,</span> 
-    <span class="n">data_files</span><span class="o">=</span><span class="s2">&quot;dataset.parquet&quot;</span><span class="p">,</span> 
-    <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span>
-<span class="p">)</span>
-
-<span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 </code></pre></div>
 
 

@@ -522,18 +522,42 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datasets" class="md-nav__link">
+  <a href="#training" class="md-nav__link">
     <span class="md-ellipsis">
-      Datasets
+      Training
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Training">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contrastive-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contrastive training
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#knowledge-distillation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Knowledge distillation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#training" class="md-nav__link">
+  <a href="#datasets" class="md-nav__link">
     <span class="md-ellipsis">
-      Training
+      Datasets
     </span>
   </a>
   
@@ -581,7 +605,7 @@
 
 <div align="center">
   <!-- Documentation -->
-  <a href="https://github.com/lightonai/pylate"><img src="https://img.shields.io/badge/Documentation-purple.svg?style=flat-square" alt="documentation"></a>
+  <a href="https://lightonai.github.io/pylate/"><img src="https://img.shields.io/badge/Documentation-purple.svg?style=flat-square" alt="documentation"></a>
   <!-- License -->
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="license"></a>
 </div>
@@ -596,8 +620,155 @@
 </code></pre></div>
 <h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
 <p>The complete documentation is available <a href="https://lightonai.github.io/pylate/">here</a>, which includes in-depth guides, examples, and API references.</p>
+<h2 id="training">Training<a class="headerlink" href="#training" title="Permanent link">&para;</a></h2>
+<h3 id="contrastive-training">Contrastive training<a class="headerlink" href="#contrastive-training" title="Permanent link">&para;</a></h3>
+<p>Here’s a simple example of training a ColBERT model on the MS MARCO dataset triplet dataset using PyLate. This script demonstrates training with contrastive loss and evaluating the model on a held-out eval set:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SentenceTransformerTrainer</span><span class="p">,</span>
+    <span class="n">SentenceTransformerTrainingArguments</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">evaluation</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">utils</span>
+
+<span class="c1"># Define model parameters for contrastive training</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;bert-base-uncased&quot;</span>  <span class="c1"># Choose the pre-trained model you want to use as base</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>  <span class="c1"># Larger batch size often improves results, but requires more memory</span>
+
+<span class="n">num_train_epochs</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Adjust based on your requirements</span>
+<span class="c1"># Set the run name for logging and output directory</span>
+<span class="n">run_name</span> <span class="o">=</span> <span class="s2">&quot;contrastive-bert-base-uncased&quot;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;output/</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># 1. Here we define our ColBERT model. If not a ColBERT model, will add a linear layer to the base encoder.</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ColBERT</span><span class="p">(</span><span class="n">model_name_or_path</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="c1"># Compiling the model makes the training faster</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Load dataset</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;sentence-transformers/msmarco-bm25&quot;</span><span class="p">,</span> <span class="s2">&quot;triplet&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+<span class="c1"># Split the dataset (this dataset does not have a validation set, so we split the training set)</span>
+<span class="n">splits</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">splits</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">]</span>
+<span class="n">eval_dataset</span> <span class="o">=</span> <span class="n">splits</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">]</span>
+
+<span class="c1"># Define the loss function</span>
+<span class="n">train_loss</span> <span class="o">=</span> <span class="n">losses</span><span class="o">.</span><span class="n">Contrastive</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Initialize the evaluator</span>
+<span class="n">dev_evaluator</span> <span class="o">=</span> <span class="n">evaluation</span><span class="o">.</span><span class="n">ColBERTTripletEvaluator</span><span class="p">(</span>
+    <span class="n">anchors</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">],</span>
+    <span class="n">positives</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">],</span>
+    <span class="n">negatives</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">[</span><span class="s2">&quot;negative&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Configure the training arguments (e.g., batch size, evaluation strategy, logging steps)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">SentenceTransformerTrainingArguments</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+    <span class="n">num_train_epochs</span><span class="o">=</span><span class="n">num_train_epochs</span><span class="p">,</span>
+    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">fp16</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Set to False if you get an error that your GPU can&#39;t run on FP16</span>
+    <span class="n">bf16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Set to True if you have a GPU that supports BF16</span>
+    <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">,</span>  <span class="c1"># Will be used in W&amp;B if `wandb` is installed</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">3e-6</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Initialize the trainer for the contrastive training</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">SentenceTransformerTrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span>
+    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">,</span>
+    <span class="n">loss</span><span class="o">=</span><span class="n">train_loss</span><span class="p">,</span>
+    <span class="n">evaluator</span><span class="o">=</span><span class="n">dev_evaluator</span><span class="p">,</span>
+    <span class="n">data_collator</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">ColBERTCollator</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">tokenize</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="c1"># Start the training process</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</code></pre></div>
+<p>After training, the model can be loaded using the output directory path:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ColBERT</span><span class="p">(</span><span class="n">model_name_or_path</span><span class="o">=</span><span class="s2">&quot;contrastive-bert-base-uncased&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="knowledge-distillation">Knowledge distillation<a class="headerlink" href="#knowledge-distillation" title="Permanent link">&para;</a></h3>
+<p>To get the best performance when training a ColBERT model, you should use knowledge distillation to train the model using the scores of a strong teacher model.
+Here's a simple example of how to train a model using knowledge distillation in PyLate on MS MARCO:
+<div class="language-python highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SentenceTransformerTrainer</span><span class="p">,</span>
+    <span class="n">SentenceTransformerTrainingArguments</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">losses</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">utils</span>
+
+<span class="c1"># Load the datasets required for knowledge distillation (train, queries, documents)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;lightonai/ms-marco-en-bge&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">queries</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;lightonai/ms-marco-en-bge&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;queries&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">documents</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;lightonai/ms-marco-en-bge&quot;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;documents&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Set the transformation to load the documents/queries texts using the corresponding ids on the fly</span>
+<span class="n">train</span><span class="o">.</span><span class="n">set_transform</span><span class="p">(</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">KDProcessing</span><span class="p">(</span><span class="n">queries</span><span class="o">=</span><span class="n">queries</span><span class="p">,</span> <span class="n">documents</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Define the base model, training parameters, and output directory</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;bert-base-uncased&quot;</span>  <span class="c1"># Choose the pre-trained model you want to use as base</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">num_train_epochs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="c1"># Set the run name for logging and output directory</span>
+<span class="n">run_name</span> <span class="o">=</span> <span class="s2">&quot;knowledge-distillation-bert-base&quot;</span>
+<span class="n">output_dir</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;output/</span><span class="si">{</span><span class="n">run_name</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Initialize the ColBERT model from the base model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ColBERT</span><span class="p">(</span><span class="n">model_name_or_path</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+
+<span class="c1"># Compiling the model to make the training faster</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Configure the training arguments (e.g., epochs, batch size, learning rate)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">SentenceTransformerTrainingArguments</span><span class="p">(</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">,</span>
+    <span class="n">num_train_epochs</span><span class="o">=</span><span class="n">num_train_epochs</span><span class="p">,</span>
+    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">fp16</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Set to False if you get an error that your GPU can&#39;t run on FP16</span>
+    <span class="n">bf16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Set to True if you have a GPU that supports BF16</span>
+    <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Use the Distillation loss function for training</span>
+<span class="n">train_loss</span> <span class="o">=</span> <span class="n">losses</span><span class="o">.</span><span class="n">Distillation</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Initialize the trainer</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">SentenceTransformerTrainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+    <span class="n">loss</span><span class="o">=</span><span class="n">train_loss</span><span class="p">,</span>
+    <span class="n">data_collator</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">ColBERTCollator</span><span class="p">(</span><span class="n">tokenize_fn</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">tokenize</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Start the training process</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</code></pre></div></p>
 <h2 id="datasets">Datasets<a class="headerlink" href="#datasets" title="Permanent link">&para;</a></h2>
-<p>PyLate supports Hugging Face <a href="https://huggingface.co/docs/datasets/en/index">Datasets</a>, enabling seamless triplet / knowledge distillation based training. Below is an example of creating a custom dataset for training:</p>
+<p>PyLate supports Hugging Face <a href="https://huggingface.co/docs/datasets/en/index">Datasets</a>, enabling seamless triplet / knowledge distillation based training. For contrastive training, you can use any of the existing sentence transformers triplet datasets. Below is an example of creating a custom triplet dataset for training:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
 
 <span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
@@ -622,83 +793,61 @@
 
 <span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="training">Training<a class="headerlink" href="#training" title="Permanent link">&para;</a></h2>
-<p>Here’s a simple example of training a ColBERT model on the MSMARCO dataset using PyLate. This script demonstrates training with triplet loss and evaluating the model on a test set.</p>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
-<span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">SentenceTransformerTrainer</span><span class="p">,</span>
-    <span class="n">SentenceTransformerTrainingArguments</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">sentence_transformers.training_args</span> <span class="kn">import</span> <span class="n">BatchSamplers</span>
+<p>To create a knowledge distillation dataset, you can use the following snippet:
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
 
-<span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">evaluation</span><span class="p">,</span> <span class="n">losses</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">utils</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">54528</span><span class="p">,</span>
+        <span class="s2">&quot;document_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">6862419</span><span class="p">,</span>
+            <span class="mi">335116</span><span class="p">,</span>
+            <span class="mi">339186</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mf">0.4546215673141326</span><span class="p">,</span>
+            <span class="mf">0.6575686537173476</span><span class="p">,</span>
+            <span class="mf">0.26825184192900203</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">749480</span><span class="p">,</span>
+        <span class="s2">&quot;document_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">6862419</span><span class="p">,</span>
+            <span class="mi">335116</span><span class="p">,</span>
+            <span class="mi">339186</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mf">0.2546215673141326</span><span class="p">,</span>
+            <span class="mf">0.7575686537173476</span><span class="p">,</span>
+            <span class="mf">0.96825184192900203</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">]</span>
 
-<span class="c1"># Define the model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ColBERT</span><span class="p">(</span><span class="n">model_name_or_path</span><span class="o">=</span><span class="s2">&quot;sentence-transformers/all-MiniLM-L6-v2&quot;</span><span class="p">)</span>
 
-<span class="c1"># Load dataset</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;sentence-transformers/msmarco-bm25&quot;</span><span class="p">,</span> <span class="s2">&quot;triplet&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
 
-<span class="c1"># Split the dataset to create a test set</span>
-<span class="n">train_dataset</span><span class="p">,</span> <span class="n">eval_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">6862419</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example doc 1&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">335116</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example doc 2&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;document_id&quot;</span><span class="p">:</span> <span class="mi">339186</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example doc 3&quot;</span><span class="p">},</span>
+<span class="p">]</span>
 
-<span class="c1"># Shuffle and select a subset of the dataset for demonstration purposes</span>
-<span class="n">MAX_TRAIN_SIZE</span><span class="p">,</span> <span class="n">MAX_EVAL_SIZE</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">MAX_TRAIN_SIZE</span><span class="p">))</span>
-<span class="n">eval_dataset</span> <span class="o">=</span> <span class="n">eval_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">MAX_EVAL_SIZE</span><span class="p">))</span>
+<span class="n">queries</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">749480</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example query&quot;</span><span class="p">},</span>
+<span class="p">]</span>
 
-<span class="c1"># Define the loss function</span>
-<span class="n">train_loss</span> <span class="o">=</span> <span class="n">losses</span><span class="o">.</span><span class="n">Contrastive</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">documents</span><span class="p">)</span>
 
-<span class="n">args</span> <span class="o">=</span> <span class="n">SentenceTransformerTrainingArguments</span><span class="p">(</span>
-    <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;colbert-training&quot;</span><span class="p">,</span>
-    <span class="n">num_train_epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-    <span class="n">per_device_eval_batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-    <span class="n">fp16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Some GPUs support FP16 which is faster than FP32</span>
-    <span class="n">bf16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Some GPUs support BF16 which is a faster FP16</span>
-    <span class="n">batch_sampler</span><span class="o">=</span><span class="n">BatchSamplers</span><span class="o">.</span><span class="n">NO_DUPLICATES</span><span class="p">,</span>
-    <span class="c1"># Tracking parameters:</span>
-    <span class="n">eval_strategy</span><span class="o">=</span><span class="s2">&quot;steps&quot;</span><span class="p">,</span>
-    <span class="n">eval_steps</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">save_strategy</span><span class="o">=</span><span class="s2">&quot;steps&quot;</span><span class="p">,</span>
-    <span class="n">save_steps</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-    <span class="n">save_total_limit</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">3e-6</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="c1"># Evaluation procedure</span>
-<span class="n">dev_evaluator</span> <span class="o">=</span> <span class="n">evaluation</span><span class="o">.</span><span class="n">ColBERTTripletEvaluator</span><span class="p">(</span>
-    <span class="n">anchors</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">[</span><span class="s2">&quot;query&quot;</span><span class="p">],</span>
-    <span class="n">positives</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">[</span><span class="s2">&quot;positive&quot;</span><span class="p">],</span>
-    <span class="n">negatives</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">[</span><span class="s2">&quot;negative&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-
-<span class="n">trainer</span> <span class="o">=</span> <span class="n">SentenceTransformerTrainer</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
-    <span class="n">train_dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span>
-    <span class="n">eval_dataset</span><span class="o">=</span><span class="n">eval_dataset</span><span class="p">,</span>
-    <span class="n">loss</span><span class="o">=</span><span class="n">train_loss</span><span class="p">,</span>
-    <span class="n">evaluator</span><span class="o">=</span><span class="n">dev_evaluator</span><span class="p">,</span>
-    <span class="n">data_collator</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">ColBERTCollator</span><span class="p">(</span><span class="n">tokenize_fn</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">tokenize</span><span class="p">),</span>
-<span class="p">)</span>
-
-<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="s2">&quot;custom-colbert-model&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p>After training, the model can be loaded like this:</p>
-<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">models</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ColBERT</span><span class="p">(</span><span class="n">model_name_or_path</span><span class="o">=</span><span class="s2">&quot;custom-colbert-model&quot;</span><span class="p">)</span>
-</code></pre></div>
+<span class="n">queries</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">mapping</span><span class="o">=</span><span class="n">queries</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="retrieve">Retrieve<a class="headerlink" href="#retrieve" title="Permanent link">&para;</a></h2>
-<p>PyLate allows easy retrieval of top documents for a given query set using the trained ColBERT model and Voyager index.</p>
+<p>PyLate allows easy retrieval of top documents for a given query set using the trained ColBERT model and Voyager index, simply load the model and init the index:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">retrieve</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ColBERT</span><span class="p">(</span>
-    <span class="n">model_name_or_path</span><span class="o">=</span><span class="s2">&quot;sentence-transformers/all-MiniLM-L6-v2&quot;</span><span class="p">,</span>
+    <span class="n">model_name_or_path</span><span class="o">=</span><span class="s2">&quot;lightonai/colbertv2.0&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">index</span> <span class="o">=</span> <span class="n">indexes</span><span class="o">.</span><span class="n">Voyager</span><span class="p">(</span>
@@ -709,7 +858,7 @@
 
 <span class="n">retriever</span> <span class="o">=</span> <span class="n">retrieve</span><span class="o">.</span><span class="n">ColBERT</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
 </code></pre></div>
-<p>Once the model and index are set up, we can add documents to the index:</p>
+<p>Once the model and index are set up, we can add documents to the index using their embeddings and corresponding ids:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="n">documents_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">]</span>
 
 <span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
@@ -730,7 +879,7 @@
     <span class="n">documents_embeddings</span><span class="o">=</span><span class="n">documents_embeddings</span><span class="p">,</span>
 <span class="p">)</span>
 </code></pre></div>
-<p>Then we can retrieve the top-k documents for a given query set:</p>
+<p>Then we can retrieve the top-k documents for a given set of queries:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="n">queries_embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="p">[</span><span class="s2">&quot;query for document 3&quot;</span><span class="p">,</span> <span class="s2">&quot;query for document 1&quot;</span><span class="p">],</span>
     <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
