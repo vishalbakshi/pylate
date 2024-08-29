@@ -18,7 +18,7 @@
         <link rel="prev" href="../retrieval/">
       
       
-        <link rel="next" href="../../benchmarks/benchmarks/">
+        <link rel="next" href="../../models/models/">
       
       
       <link rel="icon" href="../../img/favicon.ico">
@@ -246,12 +246,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../benchmarks/benchmarks/" class="md-tabs__link">
+        <a href="../../models/models/" class="md-tabs__link">
           
   
     
   
-  Benchmarks
+  Models
 
         </a>
       </li>
@@ -583,11 +583,11 @@
         
   
   
-    <a href="../../benchmarks/benchmarks/" class="md-nav__link">
+    <a href="../../models/models/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
-    Benchmarks
+    Models
   </span>
   
 
@@ -844,12 +844,20 @@
     <span class="s2">&quot;precision@100&quot;</span><span class="p">:</span> <span class="mf">0.008000000000000002</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Key Points:</p>
+<details class="info" open="open">
+<summary>Info</summary>
 <ol>
-<li>is_query flag: Always set is_query=True when encoding queries and is_query=False when encoding documents. This ensures the model applies the correct prefixes for queries and documents.</li>
-<li>Evaluation metrics: The pipeline supports a wide range of evaluation metrics, including NDCG, hits, MAP, recall, and precision, with different cutoff points.</li>
-<li>Relevance judgments (qrels): The qrels are used to calculate how well the retrieved documents match the ground truth.</li>
+<li>
+<p>is_query flag: Always set is_query=True when encoding queries and is_query=False when encoding documents. This ensures the model applies the correct prefixes for queries and documents.</p>
+</li>
+<li>
+<p>Evaluation metrics: The pipeline supports a wide range of evaluation metrics, including NDCG, hits, MAP, recall, and precision, with different cutoff points.</p>
+</li>
+<li>
+<p>Relevance judgments (qrels): The qrels are used to calculate how well the retrieved documents match the ground truth.</p>
+</li>
 </ol>
+</details>
 <h3 id="beir-datasets">BEIR datasets<a class="headerlink" href="#beir-datasets" title="Permanent link">&para;</a></h3>
 <p>The following table lists the datasets available in the BEIR benchmark along with their names, types, number of queries, corpus size, and relevance degree per query. Source: <a href="https://github.com/beir-cellar/beir?tab=readme-ov-file">BEIR Datasets</a></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Table</label></div>

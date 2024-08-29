@@ -242,12 +242,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="benchmarks/benchmarks/" class="md-tabs__link">
+        <a href="models/models/" class="md-tabs__link">
           
   
     
   
-  Benchmarks
+  Models
 
         </a>
       </li>
@@ -398,11 +398,11 @@
         
   
   
-    <a href="benchmarks/benchmarks/" class="md-nav__link">
+    <a href="models/models/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
-    Benchmarks
+    Models
   </span>
   
 
@@ -573,9 +573,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#rerank" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rerank
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contributing" class="md-nav__link">
     <span class="md-ellipsis">
       Contributing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#citation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Citation
     </span>
   </a>
   
@@ -610,7 +628,10 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="license"></a>
 </div>
 
-<p>PyLate is a library built on top of Sentence Transformers, designed to simplify and optimize fine-tuning, inference, and retrieval with state-of-the-art ColBERT models. It enables easy fine-tuning on both single and multiple GPUs, providing flexibility for various hardware setups. PyLate also streamlines document retrieval and allows you to load a wide range of models, enabling you to construct ColBERT models from most pre-trained language models. </p>
+<p align="justify">
+PyLate is a library built on top of Sentence Transformers, designed to simplify and optimize fine-tuning, inference, and retrieval with state-of-the-art ColBERT models. It enables easy fine-tuning on both single and multiple GPUs, providing flexibility for various hardware setups. PyLate also streamlines document retrieval and allows you to load a wide range of models, enabling you to construct ColBERT models from most pre-trained language models.
+</p>
+
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>You can install PyLate using pip:</p>
 <div class="language-bash highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>pylate
@@ -908,6 +929,38 @@ Here's a simple example of how to train a model using knowledge distillation in 
     <span class="p">],</span>
 <span class="p">]</span>
 </code></pre></div>
+<h2 id="rerank">Rerank<a class="headerlink" href="#rerank" title="Permanent link">&para;</a></h2>
+<p>If you only want to use the ColBERT model to perform reranking on top of your first-stage retrieval pipeline without building an index, you can simply use rank function and pass the queries and documents to rerank:</p>
+<div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">rank</span>
+
+<span class="n">queries</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;query A&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;query B&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;document A&quot;</span><span class="p">,</span> <span class="s2">&quot;document B&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;document 1&quot;</span><span class="p">,</span> <span class="s2">&quot;document C&quot;</span><span class="p">,</span> <span class="s2">&quot;document B&quot;</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">documents_ids</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="n">queries_embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">queries</span><span class="p">,</span>
+    <span class="n">is_query</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">documents_embeddings</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">documents</span><span class="p">,</span>
+    <span class="n">is_query</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">reranked_documents</span> <span class="o">=</span> <span class="n">rank</span><span class="o">.</span><span class="n">rerank</span><span class="p">(</span>
+    <span class="n">documents_ids</span><span class="o">=</span><span class="n">documents_ids</span><span class="p">,</span>
+    <span class="n">queries_embeddings</span><span class="o">=</span><span class="n">queries_embeddings</span><span class="p">,</span>
+    <span class="n">documents_embeddings</span><span class="o">=</span><span class="n">documents_embeddings</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre></div>
 <h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
 <p>We welcome contributions! To get started:</p>
 <ol>
@@ -929,6 +982,15 @@ Here's a simple example of how to train a model using knowledge distillation in 
 <li>Build the documentation:</li>
 </ol>
 <div class="language-bash highlight"><pre><span></span><code>make<span class="w"> </span>livedoc
+</code></pre></div>
+<h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
+<p>You can refer to the library with this BibTeX:</p>
+<div class="language-bibtex highlight"><pre><span></span><code><span class="nc">@misc</span><span class="p">{</span><span class="nl">PyLate</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{PyLate: Flexible Training and Retrieval for Late Interaction Models}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Chaffin, Antoine and Sourty, Raphaël}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="p">=</span><span class="s">{https://github.com/lightonai/pylate}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2024}</span>
+<span class="p">}</span>
 </code></pre></div>
 
 

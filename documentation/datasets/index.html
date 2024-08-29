@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#constrastive-dataset" class="md-skip">
+        <a href="#contrastive-dataset" class="md-skip">
           Skip to content
         </a>
       
@@ -246,12 +246,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../benchmarks/benchmarks/" class="md-tabs__link">
+        <a href="../../models/models/" class="md-tabs__link">
           
   
     
   
-  Benchmarks
+  Models
 
         </a>
       </li>
@@ -448,13 +448,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#constrastive-dataset" class="md-nav__link">
+  <a href="#contrastive-dataset" class="md-nav__link">
     <span class="md-ellipsis">
-      Constrastive dataset
+      Contrastive Dataset
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Constrastive dataset">
+    <nav class="md-nav" aria-label="Contrastive Dataset">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -498,6 +498,33 @@
   
     <nav class="md-nav" aria-label="Knowledge distillation dataset">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#train" class="md-nav__link">
+    <span class="md-ellipsis">
+      Train
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Queries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documents
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#loading-a-pre-built-knowledge-distillation-dataset" class="md-nav__link">
@@ -607,11 +634,11 @@
         
   
   
-    <a href="../../benchmarks/benchmarks/" class="md-nav__link">
+    <a href="../../models/models/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
-    Benchmarks
+    Models
   </span>
   
 
@@ -713,13 +740,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#constrastive-dataset" class="md-nav__link">
+  <a href="#contrastive-dataset" class="md-nav__link">
     <span class="md-ellipsis">
-      Constrastive dataset
+      Contrastive Dataset
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Constrastive dataset">
+    <nav class="md-nav" aria-label="Contrastive Dataset">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -765,6 +792,33 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#train" class="md-nav__link">
+    <span class="md-ellipsis">
+      Train
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Queries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documents
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#loading-a-pre-built-knowledge-distillation-dataset" class="md-nav__link">
     <span class="md-ellipsis">
       Loading a pre-built knowledge distillation dataset
@@ -804,9 +858,9 @@
 
   <h1>Datasets</h1>
 
-<p>PyLate is designed to be compatible with Hugging Face datasets, facilitating seamless integration for tasks such as knowledge distillation and contrastive model training. Below are examples illustrating how to load and prepare datasets for these specific training objectives.</p>
-<h2 id="constrastive-dataset">Constrastive dataset<a class="headerlink" href="#constrastive-dataset" title="Permanent link">&para;</a></h2>
-<p>Contrastive training involves datasets that contain a query, a positive document (relevant to the query), and a negative document (irrelevant to the query). This the standard triplet format used by Sentence Transformers and so PyLate contrastive training is <strong>compatible with every existing triplet datasets.</strong></p>
+<p>PyLate is designed to be compatible with Hugging Face datasets, enabling seamless integration for tasks like knowledge distillation and contrastive model training. Below are examples of how to load and prepare datasets for these specific training objectives.</p>
+<h2 id="contrastive-dataset">Contrastive Dataset<a class="headerlink" href="#contrastive-dataset" title="Permanent link">&para;</a></h2>
+<p>Contrastive training requires datasets that include a query, a positive document (relevant to the query), and a negative document (irrelevant to the query). This is the standard triplet format used by Sentence Transformers, making PyLate's contrastive training <strong>compatible with all existing triplet datasets</strong>.</p>
 <h3 id="loading-a-pre-built-contrastive-dataset">Loading a pre-built contrastive dataset<a class="headerlink" href="#loading-a-pre-built-contrastive-dataset" title="Permanent link">&para;</a></h3>
 <p>You can directly download an existing contrastive dataset from Hugging Face's hub, such as the <a href="https://huggingface.co/datasets/sentence-transformers/msmarco-bm25">msmarco-bm25 triplet dataset</a>.</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
@@ -860,7 +914,10 @@
 <span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="knowledge-distillation-dataset">Knowledge distillation dataset<a class="headerlink" href="#knowledge-distillation-dataset" title="Permanent link">&para;</a></h2>
-<p>For fine-tuning a model using knowledge distillation loss, three distinct dataset files are required: train, queries, and documents. Each file contains unique and complementary information necessary for the distillation process:</p>
+<p>For fine-tuning a model using knowledge distillation loss, three distinct dataset files are required: train, queries, and documents. </p>
+<details class="info" open="open">
+<summary>Info</summary>
+<p>Each file contains unique and complementary information necessary for the distillation process:</p>
 <ul>
 <li><code>train</code>: Contains three columns: <code>['query_id', 'document_ids', 'scores']</code><ul>
 <li><code>query_id</code> refers to the query identifier.</li>
@@ -869,6 +926,8 @@
 </ul>
 </li>
 </ul>
+</details>
+<h3 id="train">Train<a class="headerlink" href="#train" title="Permanent link">&para;</a></h3>
 <p>Example entry:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="p">{</span>
     <span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">54528</span><span class="p">,</span>
@@ -894,13 +953,18 @@
     <span class="p">],</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Note: Ensure that the length of <code>document_ids</code> matches the length of <code>scores</code>.</p>
+<details class="warning" open="open">
+<summary>Warning</summary>
+<p>Ensure that the length of <code>document_ids</code> matches the length of <code>scores</code>.</p>
+</details>
+<h3 id="queries">Queries<a class="headerlink" href="#queries" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>queries</code>: Contains two columns: <code>['query_id', 'text']</code></li>
 </ul>
 <p>Example entry:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="p">{</span><span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">749480</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;example query 1&quot;</span><span class="p">}</span>
 </code></pre></div>
+<h3 id="documents">Documents<a class="headerlink" href="#documents" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>documents</code>: contains two columns: <code>['document_ids', 'text']</code></li>
 </ul>
@@ -911,7 +975,7 @@
 <span class="p">}</span>
 </code></pre></div>
 <h3 id="loading-a-pre-built-knowledge-distillation-dataset">Loading a pre-built knowledge distillation dataset<a class="headerlink" href="#loading-a-pre-built-knowledge-distillation-dataset" title="Permanent link">&para;</a></h3>
-<p>You can directly download an existing knowledge distillation dataset from Hugging Face's hub, such as the <a href="https://huggingface.co/datasets/lightonai/ms-marco-en-bge">MS MARCO dataset with BGE M3 scores</a>.
+<p>You can directly download an existing knowledge distillation dataset from Hugging Face's hub, such as the English <a href="https://huggingface.co/datasets/lightonai/ms-marco-en-bge">MS MARCO dataset with BGE M3 scores</a> or the <a href="https://huggingface.co/datasets/lightonai/ms-marco-fr-bge">French version</a>.
 Simply load the different files by giving the respective names to the <code>load_dataset</code> function:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
 

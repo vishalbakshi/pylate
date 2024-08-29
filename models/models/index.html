@@ -12,7 +12,7 @@
         <meta name="author" content="Raphael Sourty">
       
       
-        <link rel="canonical" href="https://lightonai.github.io/pylate/benchmarks/benchmarks/">
+        <link rel="canonical" href="https://lightonai.github.io/pylate/models/models/">
       
       
         <link rel="prev" href="../../documentation/evaluation/">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Benchmarks - pylate</title>
+        <title>Models - pylate</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#colbert-benchmarks" class="md-skip">
+        <a href="#available-models" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Benchmarks
+              Models
             
           </span>
         </div>
@@ -251,7 +251,7 @@
   
     
   
-  Benchmarks
+  Models
 
         </a>
       </li>
@@ -410,7 +410,7 @@
             
   
   <span class="md-ellipsis">
-    Benchmarks
+    Models
   </span>
   
 
@@ -420,7 +420,7 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
-            Benchmarks
+            Models
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -444,7 +444,7 @@
         
   
   <span class="md-ellipsis">
-    Benchmarks
+    Models
   </span>
   
 
@@ -557,64 +557,75 @@
                   
 
 
-<h1 id="colbert-benchmarks">ColBERT Benchmarks<a class="headerlink" href="#colbert-benchmarks" title="Permanent link">&para;</a></h1>
+<h1 id="available-models">Available models<a class="headerlink" href="#available-models" title="Permanent link">&para;</a></h1>
+<p>Here is a list of the pre-trained ColBERT models available in PyLate along with their results on BEIR:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Table</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block">
+<div class="tabbed-block"></div>
+</div>
+</div>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Model</th>
-<th style="text-align: left;">Dataset</th>
-<th style="text-align: right;">Language</th>
-<th style="text-align: right;">NDCG@10</th>
-<th style="text-align: right;">NDCG@100</th>
-<th style="text-align: right;">RECALL@10</th>
-<th style="text-align: right;">RECALL@100</th>
+<th>Model</th>
+<th>BEIR AVG</th>
+<th>NFCorpus</th>
+<th>SciFact</th>
+<th>SCIDOCS</th>
+<th>FiQA2018</th>
+<th>TRECCOVID</th>
+<th>HotpotQA</th>
+<th>Touche2020</th>
+<th>ArguAna</th>
+<th>ClimateFEVER</th>
+<th>FEVER</th>
+<th>QuoraRetrieval</th>
+<th>NQ</th>
+<th>DBPedia</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;">sentence-transformers/all-mpnet-base-v2</td>
-<td style="text-align: left;">dataset_x</td>
-<td style="text-align: right;">English</td>
-<td style="text-align: right;">0.677864</td>
-<td style="text-align: right;">0.645041</td>
-<td style="text-align: right;">0.453154</td>
-<td style="text-align: right;">876.714</td>
+<td><a href="https://huggingface.co/lightonai/colbertv2.0">lightonai/colbertv2.0</a></td>
+<td>50.02</td>
+<td>33.8</td>
+<td>69.3</td>
+<td>15.4</td>
+<td>35.6</td>
+<td>73.3</td>
+<td>66.7</td>
+<td>26.3</td>
+<td>46.3</td>
+<td>17.6</td>
+<td>78.5</td>
+<td>85.2</td>
+<td>56.2</td>
+<td>44.6</td>
 </tr>
 <tr>
-<td style="text-align: left;">sentence-transformers/all-mpnet-base-v2</td>
-<td style="text-align: left;">dataset_y</td>
-<td style="text-align: right;">English</td>
-<td style="text-align: right;">0.880581</td>
-<td style="text-align: right;">0.858687</td>
-<td style="text-align: right;">13.5424</td>
-<td style="text-align: right;">10153.7</td>
-</tr>
-<tr>
-<td style="text-align: left;">sentence-transformers/all-mpnet-base-v2</td>
-<td style="text-align: left;">dataset_z</td>
-<td style="text-align: right;">English</td>
-<td style="text-align: right;">0.878303</td>
-<td style="text-align: right;">0.863555</td>
-<td style="text-align: right;">0.873312</td>
-<td style="text-align: right;">552.609</td>
-</tr>
-<tr>
-<td style="text-align: left;">sentence-transformers/all-mpnet-base-v2</td>
-<td style="text-align: left;">dataset_a</td>
-<td style="text-align: right;">English</td>
-<td style="text-align: right;">0.999443</td>
-<td style="text-align: right;">0.404494</td>
-<td style="text-align: right;">1.33633</td>
-<td style="text-align: right;">6617.5</td>
+<td><a href="https://huggingface.co/answerdotai/answerai-colbert-small-v1">answerdotai/answerai-colbert-small-v1</a></td>
+<td>53.79</td>
+<td>37.3</td>
+<td>74.77</td>
+<td>18.42</td>
+<td>41.15</td>
+<td>84.59</td>
+<td>76.11</td>
+<td>25.69</td>
+<td>50.09</td>
+<td>33.07</td>
+<td>90.96</td>
+<td>87.72</td>
+<td>59.1</td>
+<td>45.58</td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
+<details class="note" open="open">
+<summary>Note</summary>
+<p>PThe <code>lightonai/colbertv2.0</code> is the original <a href="https://huggingface.co/colbert-ir/colbertv2.0/tree/main">ColBERTv2 model</a> made compatible with PyLate. We thank Omar Khattab for allowing us to share the model on PyLate.</p>
+<p>We are planning to release various strong models in the near future, but feel free to contact us if you want to make your existing ColBERT compatible with PyLate.</p>
+</details>
 
 
 

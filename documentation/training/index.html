@@ -244,12 +244,12 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../benchmarks/benchmarks/" class="md-tabs__link">
+        <a href="../../models/models/" class="md-tabs__link">
           
   
     
   
-  Benchmarks
+  Models
 
         </a>
       </li>
@@ -579,11 +579,11 @@
         
   
   
-    <a href="../../benchmarks/benchmarks/" class="md-nav__link">
+    <a href="../../models/models/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
-    Benchmarks
+    Models
   </span>
   
 
@@ -747,20 +747,24 @@
 
 
 <h1 id="colbert-training">ColBERT Training<a class="headerlink" href="#colbert-training" title="Permanent link">&para;</a></h1>
-<p>PyLate training is based on Sentence Transformer (and thus transformers) trainer, enabling a lot of functionnality such multi-GPU and FP16/BF16 training as well as logging to Weights &amp; Biases out-of-the-box. This allows efficient, scalable and monitorable training. There are two primary ways to train ColBERT models using PyLate:</p>
+<p>PyLate training is based on Sentence Transformer (and thus transformers) trainer, enabling a lot of functionality such multi-GPU and FP16/BF16 training as well as logging to Weights &amp; Biases out-of-the-box. This allows efficient, and scalable training. </p>
+<details class="info" open="open">
+<summary>Info</summary>
+<p>There are two primary ways to train ColBERT models using PyLate:</p>
 <ol>
 <li>
-<p><strong>Contrastive Loss (Simplest Method)</strong>: The easiest way to train your model is by using contrastive loss, which only requires a dataset containing triplets—each consisting of a query, a positive document (relevant to the query), and a negative document (irrelevant to the query). This method trains the model to maximize the similarity between the query and the positive document, while minimizing it with the negative document.</p>
+<p><strong>Contrastive Loss</strong>: Simplest method, it only requires a dataset containing triplets, each consisting of a query, a positive document (relevant to the query), and a negative document (irrelevant to the query). This method trains the model to maximize the similarity between the query and the positive document, while minimizing it with the negative document.</p>
 </li>
 <li>
 <p><strong>Knowledge Distillation</strong>: To train a ColBERT model using knowledge distillation, you need to provide a dataset with three components: queries, documents, and the relevance scores between them. This method compresses the knowledge of a larger model / more accurate model (cross-encoder) into a smaller one, using the relevance scores to guide the training process.</p>
 </li>
 </ol>
+</details>
 <h2 id="contrastive-training">Contrastive Training<a class="headerlink" href="#contrastive-training" title="Permanent link">&para;</a></h2>
-<p>The original training of ColBERT was done using contrastive learning, that is, train the model to differentiate between relevant (positive) and irrelevant (negative) documents for a given query by maximizing the similarity between a query and a positive document while minimizing the similarity with irrelevant documents.</p>
-<p>The contrastive learning in PyLate is done using triplet dataset, that is, a query is associated to one positive and one negative. It is thus <strong>compatible with any triplet datasets from the sentence-transformers library</strong>.</p>
-<p>During training, the model is tasked to maximize the similarity of the query with its positive while minimizing the similarity with all the negatives as well as the positives of the other queries in the batch (thus also leveraging in-batch negatives).</p>
-<p>Here is a example of code to run contrastive training using PyLate:</p>
+<p>ColBERT was originally trained using contrastive learning. This approach involves teaching the model to distinguish between relevant (positive) and irrelevant (negative) documents for a given query. The model is trained to maximize the similarity between a query and its corresponding positive document while minimizing the similarity with irrelevant documents.</p>
+<p>PyLate uses contrastive learning with a triplet dataset, where each query is paired with one positive and one negative example. <strong>This makes it fully compatible with any triplet datasets from the sentence-transformers library</strong>.</p>
+<p>During training, the model is optimized to maximize the similarity between the query and its positive example while minimizing the similarity with all negative examples and the positives from other queries in the batch. This approach leverages in-batch negatives for more effective learning.</p>
+<p>Here is an example of code to run contrastive training with PyLate:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
 <span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="p">(</span>
@@ -827,10 +831,14 @@
 <span class="c1"># Start the training process</span>
 <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 </code></pre></div>
+<details class="tip" open="open">
+<summary>Tip</summary>
+<p>Please note that for multi-GPU training, running <code>python training.py</code> <strong>will use Data Parallel (DP) by default</strong>. We strongly suggest using using Distributed Data Parallelism (DDP) using accelerate or torchrun: <code>accelerate launch --num_processes num_gpu training.py</code>.</p>
+<p>Refer to this <a href="https://sbert.net/docs/sentence_transformer/training/distributed.html">documentation</a> for more information.</p>
+</details>
 <h2 id="knowledge-distillation-training">Knowledge Distillation Training<a class="headerlink" href="#knowledge-distillation-training" title="Permanent link">&para;</a></h2>
-<p>The training of late-interaction models have shown to benefit from knowledge distillation compared to a more simple contrastive learning.
-Knowledge distillation training aim at making ColBERT models learn to reproduce the outputs of a more capable (e.g, a cross-encoder) teacher model. This is done by using a dataset containing queries, documents and the scores attributed by the teacher to the different query/document pairs.</p>
-<p>Here is a example of code to run knowledge distillation training using PyLate:</p>
+<p>Training late-interaction models, such as ColBERT, has been shown to benefit from knowledge distillation compared to simpler contrastive learning approaches. Knowledge distillation training focuses on teaching ColBERT models to replicate the outputs of a more capable teacher model (e.g., a cross-encoder). This is achieved using a dataset that includes queries, documents, and the scores assigned by the teacher model to each query/document pair.</p>
+<p>Below is an example of code to run knowledge distillation training using PyLate:</p>
 <div class="language-python highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
 <span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="p">(</span>
@@ -901,8 +909,15 @@ Knowledge distillation training aim at making ColBERT models learn to reproduce 
 <span class="c1"># Start the training process</span>
 <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 </code></pre></div>
+<details class="tip" open="open">
+<summary>Tip</summary>
+<p>Please note that for multi-GPU training, running <code>python training.py</code> <strong>will use Data Parallel (DP) by default</strong>. We strongly suggest using using Distributed Data Parallelism (DDP) using accelerate or torchrun: <code>accelerate launch --num_processes num_gpu training.py</code>.</p>
+<p>Refer to this <a href="https://sbert.net/docs/sentence_transformer/training/distributed.html">documentation</a> for more information.</p>
+</details>
 <h2 id="colbert-parameters">ColBERT parameters<a class="headerlink" href="#colbert-parameters" title="Permanent link">&para;</a></h2>
 <p>All the parameters of the ColBERT modeling can be found <a href="https://lightonai.github.io/pylate/api/models/ColBERT/#parameters">here</a>. Important parameters to consider are:</p>
+<details class="info" open="open">
+<summary>Info</summary>
 <ul>
 <li><code>model_name_or_path</code> the name of the base encoder model or PyLate model to init from.</li>
 <li><code>embedding_size</code> the output size of the projection layer. Large values give more capacity to the model but are heavier to store.</li>
@@ -911,9 +926,9 @@ Knowledge distillation training aim at making ColBERT models learn to reproduce 
 <li><code>attend_to_expansion_tokens</code> define whether the model will attend to the query expansion tokens (padding of queries) or if only the expansion tokens will attend to the other tokens. In the original ColBERT, the tokens <strong>do not attend</strong> to expansion tokens.</li>
 <li><code>skiplist_words</code> is list of words to skip from the documents scoring (note that these tokens are used for encoding and are only skipped during the scoring), the default is the list of string.punctuation as in the original ColBERT.</li>
 </ul>
+</details>
 <h2 id="sentence-transformers-training-arguments">Sentence Transformers Training Arguments<a class="headerlink" href="#sentence-transformers-training-arguments" title="Permanent link">&para;</a></h2>
-<p>PyLate is built on top of SentenceTransformer, you can thus use the same arguments you already are familiar with to control the training. 
-The table below lists the arguments for the <code>SentenceTransformerTrainingArguments</code> class. Feel free to refer to the <a href="https://sbert.net/docs/sentence_transformer/training_overview.html#">SentenceTransformers</a> library documentation for more information</p>
+<p>PyLate is built on top of SentenceTransformer, so you can use the same arguments you are already familiar with to control the training process. The table below lists the arguments available in the SentenceTransformerTrainingArguments class. For more details, please refer to the <a href="https://sbert.net/docs/sentence_transformer/training_overview.html#">SentenceTransformers documentation</a>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Table</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
