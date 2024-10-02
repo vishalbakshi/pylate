@@ -12,28 +12,28 @@
         <meta name="author" content="Raphael Sourty">
       
       
-        <link rel="canonical" href="https://lightonai.github.io/pylate/api/scores/colbert-scores-pairwise/">
+        <link rel="canonical" href="https://lightonai.github.io/pylate/documentation/fastapi/">
       
       
-        <link rel="prev" href="../colbert-kd-scores/">
+        <link rel="prev" href="../evaluation/">
       
       
-        <link rel="next" href="../colbert-scores/">
+        <link rel="next" href="../../models/models/">
       
       
-      <link rel="icon" href="../../../img/favicon.ico">
+      <link rel="icon" href="../../img/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
     
     
       
-        <title>colbert_scores_pairwise - pylate</title>
+        <title>FastAPI - pylate</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -52,11 +52,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-      <link rel="stylesheet" href="../../../css/version-select.css">
+      <link rel="stylesheet" href="../../css/version-select.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#colbert_scores_pairwise" class="md-skip">
+        <a href="#serve-the-embeddings-of-a-pylate-model-using-fastapi" class="md-skip">
           Skip to content
         </a>
       
@@ -96,9 +96,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="pylate" class="md-header__button md-logo" aria-label="pylate" data-md-component="logo">
+    <a href="../.." title="pylate" class="md-header__button md-logo" aria-label="pylate" data-md-component="logo">
       
-  <img src="../../../img/favicon.png" alt="logo">
+  <img src="../../img/favicon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              colbert_scores_pairwise
+              FastAPI
             
           </span>
         </div>
@@ -220,11 +220,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../documentation/training/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../training/" class="md-tabs__link">
           
   
     
@@ -244,7 +246,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../models/models/" class="md-tabs__link">
+        <a href="../../models/models/" class="md-tabs__link">
           
   
     
@@ -260,13 +262,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../overview/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../api/overview/" class="md-tabs__link">
           
   
     
@@ -301,9 +301,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="pylate" class="md-nav__button md-logo" aria-label="pylate" data-md-component="logo">
+    <a href="../.." title="pylate" class="md-nav__button md-logo" aria-label="pylate" data-md-component="logo">
       
-  <img src="../../../img/favicon.png" alt="logo">
+  <img src="../../img/favicon.png" alt="logo">
 
     </a>
     pylate
@@ -327,120 +327,12 @@
       
   
   
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../../documentation/training/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
-    Documentation
-  </span>
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../../models/models/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
-    Models
-  </span>
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
   
     
     
-      
-        
-      
-        
-      
-        
-      
-        
       
         
       
@@ -467,24 +359,24 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
             
   
   <span class="md-ellipsis">
-    API reference
+    Documentation
   </span>
   
 
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
-            API reference
+            Documentation
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -495,11 +387,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../overview/" class="md-nav__link">
+      <a href="../training/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Overview
+    Training
   </span>
   
 
@@ -515,345 +407,20 @@
   
   
   
-    
-    
-      
+    <li class="md-nav__item">
+      <a href="../datasets/" class="md-nav__link">
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../evaluation/ColBERTDistillationEvaluator/" class="md-nav__link">
-      
   
   <span class="md-ellipsis">
-    evaluation
+    Datasets
   </span>
   
 
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
+      </a>
     </li>
   
 
               
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../indexes/Voyager/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
-    indexes
-  </span>
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../losses/Contrastive/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
-    losses
-  </span>
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../models/ColBERT/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
-    models
-  </span>
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../rank/rerank/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
-    rank
-  </span>
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../../retrieve/ColBERT/" class="md-nav__link">
-      
-  
-  <span class="md-ellipsis">
-    retrieve
-  </span>
-  
-
-      
-        <span class="md-nav__icon md-icon"></span>
-      
-    </a>
-  
-
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    
-    
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    scores
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_8">
-            <span class="md-nav__icon md-icon"></span>
-            scores
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -862,11 +429,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../colbert-kd-scores/" class="md-nav__link">
+      <a href="../retrieval/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    colbert_kd_scores
+    Retrieval
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Evaluation
   </span>
   
 
@@ -892,85 +480,16 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    colbert_scores_pairwise
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    colbert_scores_pairwise
+    FastAPI
   </span>
   
 
       </a>
       
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../colbert-scores/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    colbert_scores
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -982,16 +501,71 @@
     </li>
   
 
-              
-            
-              
-                
+    
+      
+      
   
   
   
   
     
     
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../models/models/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Models
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
       
         
       
@@ -1017,11 +591,11 @@
         
   
   
-    <a href="../../utils/ColBERTCollator/" class="md-nav__link">
+    <a href="../../api/overview/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
-    utils
+    API reference
   </span>
   
 
@@ -1031,14 +605,6 @@
     </a>
   
 
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
       
     </li>
   
@@ -1064,32 +630,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1103,42 +643,25 @@
                   
 
 
-<h1 id="colbert_scores_pairwise">colbert_scores_pairwise<a class="headerlink" href="#colbert_scores_pairwise" title="Permanent link">&para;</a></h1>
-<p>Computes the ColBERT score for each query-document pair. The score is computed as the sum of maximum similarities between the query and the document for corresponding pairs.</p>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p><strong>queries_embeddings</strong> (<em>torch.Tensor</em>)</p>
-<p>The first tensor. The queries embeddings. Shape: (batch_size, num tokens queries, embedding_size)</p>
-</li>
-<li>
-<p><strong>documents_embeddings</strong> (<em>torch.Tensor</em>)</p>
-<p>The second tensor. The documents embeddings. Shape: (batch_size, num tokens documents, embedding_size)</p>
-</li>
-</ul>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">torch</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">queries_embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
-<span class="o">...</span>     <span class="p">[[</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]],</span>
-<span class="o">...</span>     <span class="p">[[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]],</span>
-<span class="o">...</span>     <span class="p">[[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]],</span>
-<span class="o">...</span> <span class="p">])</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">documents_embeddings</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
-<span class="o">...</span>     <span class="p">[[</span><span class="mf">10.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]],</span>
-<span class="o">...</span>     <span class="p">[[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">100.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]],</span>
-<span class="o">...</span>     <span class="p">[[</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1000.</span><span class="p">]],</span>
-<span class="o">...</span> <span class="p">])</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">colbert_scores_pairwise</span><span class="p">(</span>
-<span class="o">...</span>     <span class="n">queries_embeddings</span><span class="o">=</span><span class="n">queries_embeddings</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">documents_embeddings</span><span class="o">=</span><span class="n">documents_embeddings</span>
-<span class="o">...</span> <span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">scores</span>
-<span class="n">tensor</span><span class="p">([</span>  <span class="mf">10.</span><span class="p">,</span>  <span class="mf">200.</span><span class="p">,</span> <span class="mf">3000.</span><span class="p">])</span>
+<h1 id="serve-the-embeddings-of-a-pylate-model-using-fastapi">Serve the embeddings of a PyLate model using FastAPI<a class="headerlink" href="#serve-the-embeddings-of-a-pylate-model-using-fastapi" title="Permanent link">&para;</a></h1>
+<p>The <code>server.py</code> script (located in the <code>server</code> folder) allows to create a FastAPI server to serve the embeddings of a PyLate model.
+To use it, you need to install the api dependencies: <code>pip install "pylate[api]"</code>
+Then, run <code>python server.py</code> to launch the server.</p>
+<p>You can then send requests to the API like so:
+<div class="language-text highlight"><pre><span></span><code>curl -X POST http://localhost:8002/v1/embeddings \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{
+    &quot;input&quot;: [&quot;Query 1&quot;, &quot;Query 2&quot;],
+    &quot;model&quot;: &quot;lightonai/colbertv2.0&quot;,
+    &quot;is_query&quot;: false
+  }&#39;
 </code></pre></div>
+If you want to encode queries, simply set <code>ìs_query</code> to <code>True</code>.</p>
+<details class="tip" open="open">
+<summary>Tip</summary>
+<p>Note that the server leverages <a href="https://github.com/mixedbread-ai/batched">batched</a>, so you can do batch processing by sending multiple separate calls and it will create batches dynamically to fill up the GPU.</p>
+</details>
+<p>For now, the server only support one loaded model, which you can define by using the <code>--model</code> argument when launching the server.</p>
 
 
 
@@ -1204,12 +727,12 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.indexes", "navigation.prune"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.indexes", "navigation.prune"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      <script src="../../assets/javascripts/bundle.471ce7a9.min.js"></script>
       
-        <script src="../../../javascripts/config.js"></script>
+        <script src="../../javascripts/config.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2/es5/tex-mml-chtml.js"></script>
       
@@ -1221,7 +744,7 @@
       
         <script src="https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js"></script>
       
-        <script src="../../../javascripts/tablesort.js"></script>
+        <script src="../../javascripts/tablesort.js"></script>
       
     
   </body>
