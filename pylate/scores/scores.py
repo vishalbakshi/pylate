@@ -49,6 +49,8 @@ def colbert_scores(
     """
     queries_embeddings = convert_to_tensor(queries_embeddings)
     documents_embeddings = convert_to_tensor(documents_embeddings)
+    # Getting cosine similarities from distance returned by Voyager
+    retrieved_scores = 1 - retrieved_scores
 
     scores = torch.einsum(
         "ash,bth->abst",
