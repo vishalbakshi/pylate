@@ -452,6 +452,8 @@
       
         
       
+        
+      
     
     
       
@@ -593,6 +595,53 @@
         
   
   
+    <a href="../../hf-hub/PylateModelCardData/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    hf_hub
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
     <a href="../../indexes/Voyager/" class="md-nav__link">
       
   
@@ -640,10 +689,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -654,8 +703,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
             <span class="md-nav__icon md-icon"></span>
             losses
           </label>
@@ -1109,7 +1158,7 @@
 <p>SentenceTransformer model.</p>
 </li>
 <li>
-<p><strong>score_metric</strong> (<em>Callable</em>) – defaults to <code>&lt;function colbert_kd_scores at 0x15f33fce0&gt;</code></p>
+<p><strong>score_metric</strong> (<em>Callable</em>) – defaults to <code>&lt;function colbert_kd_scores at 0x14f845bd0&gt;</code></p>
 <p>Function that returns a score between two sequences of embeddings.</p>
 </li>
 <li>
@@ -1312,6 +1361,15 @@
 <p>Yields:     Module: a module in the network  Note:     Duplicate modules are returned only once. In the following     example, <code>l</code> will be returned only once.  Example::      &gt;&gt;&gt; l = nn.Linear(2, 2)     &gt;&gt;&gt; net = nn.Sequential(l, l)     &gt;&gt;&gt; for idx, m in enumerate(net.modules()):     ...     print(idx, '-&gt;', m)      0 -&gt; Sequential(       (0): Linear(in_features=2, out_features=2, bias=True)       (1): Linear(in_features=2, out_features=2, bias=True)     )     1 -&gt; Linear(in_features=2, out_features=2, bias=True)</p>
 </details>
 <details class="- note">
+<summary>mtia</summary>
+<p>Move all model parameters and buffers to the MTIA.</p>
+<p>This also makes associated parameters and buffers different objects. So it should be called before constructing optimizer if the module will live on MTIA while being optimized.  .. note::     This method modifies the module in-place.  Arguments:     device (int, optional): if specified, all parameters will be         copied to that device  Returns:     Module: self</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>device</strong>     (<em>Union[int, torch.device, NoneType]</em>)     – defaults to <code>None</code>    </li>
+</ul>
+</details>
+<details class="- note">
 <summary>named_buffers</summary>
 <p>Return an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p>
 <p>Args:     prefix (str): prefix to prepend to all buffer names.     recurse (bool, optional): if True, then yields buffers of this module         and all submodules. Otherwise, yields only buffers that         are direct members of this module. Defaults to True.     remove_duplicate (bool, optional): whether to remove the duplicated buffers in the result. Defaults to True.  Yields:     (str, torch.Tensor): Tuple containing the name and buffer  Example::      &gt;&gt;&gt; # xdoctest: +SKIP("undefined vars")     &gt;&gt;&gt; for name, buf in self.named_buffers():     &gt;&gt;&gt;     if name in ['running_var']:     &gt;&gt;&gt;         print(buf.size())</p>
@@ -1423,8 +1481,17 @@
 </details>
 <details class="- note">
 <summary>register_load_state_dict_post_hook</summary>
-<p>Register a post hook to be run after module's <code>load_state_dict</code> is called.</p>
+<p>Register a post-hook to be run after module's :meth:<code>~nn.Module.load_state_dict</code> is called.</p>
 <p>It should have the following signature::     hook(module, incompatible_keys) -&gt; None  The <code>module</code> argument is the current module that this hook is registered on, and the <code>incompatible_keys</code> argument is a <code>NamedTuple</code> consisting of attributes <code>missing_keys</code> and <code>unexpected_keys</code>. <code>missing_keys</code> is a <code>list</code> of <code>str</code> containing the missing keys and <code>unexpected_keys</code> is a <code>list</code> of <code>str</code> containing the unexpected keys.  The given incompatible_keys can be modified inplace if needed.  Note that the checks performed when calling :func:<code>load_state_dict</code> with <code>strict=True</code> are affected by modifications the hook makes to <code>missing_keys</code> or <code>unexpected_keys</code>, as expected. Additions to either set of keys will result in an error being thrown when <code>strict=True</code>, and clearing out both missing and unexpected keys will avoid an error.  Returns:     :class:<code>torch.utils.hooks.RemovableHandle</code>:         a handle that can be used to remove the added hook by calling         <code>handle.remove()</code></p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>hook</strong>    </li>
+</ul>
+</details>
+<details class="- note">
+<summary>register_load_state_dict_pre_hook</summary>
+<p>Register a pre-hook to be run before module's :meth:<code>~nn.Module.load_state_dict</code> is called.</p>
+<p>It should have the following signature::     hook(module, state_dict, prefix, local_metadata, strict, missing_keys, unexpected_keys, error_msgs) -&gt; None  # noqa: B950  Arguments:     hook (Callable): Callable hook that will be invoked before         loading the state dict.</p>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><strong>hook</strong>    </li>
@@ -1450,9 +1517,18 @@
 </ul>
 </details>
 <details class="- note">
+<summary>register_state_dict_post_hook</summary>
+<p>Register a post-hook for the :meth:<code>~torch.nn.Module.state_dict</code> method.</p>
+<p>It should have the following signature::     hook(module, state_dict, prefix, local_metadata) -&gt; None  The registered hooks can modify the <code>state_dict</code> inplace.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>hook</strong>    </li>
+</ul>
+</details>
+<details class="- note">
 <summary>register_state_dict_pre_hook</summary>
 <p>Register a pre-hook for the :meth:<code>~torch.nn.Module.state_dict</code> method.</p>
-<p>These hooks will be called with arguments: <code>self</code>, <code>prefix</code>, and <code>keep_vars</code> before calling <code>state_dict</code> on <code>self</code>. The registered hooks can be used to perform pre-processing before the <code>state_dict</code> call is made.</p>
+<p>It should have the following signature::     hook(module, prefix, keep_vars) -&gt; None  The registered hooks can be used to perform pre-processing before the <code>state_dict</code> call is made.</p>
 <p><strong>Parameters</strong></p>
 <ul>
 <li><strong>hook</strong>    </li>
@@ -1474,6 +1550,16 @@
 <p><strong>Parameters</strong></p>
 <ul>
 <li><strong>state</strong>     (<em>Any</em>)    </li>
+</ul>
+</details>
+<details class="- note">
+<summary>set_submodule</summary>
+<p>Set the submodule given by <code>target</code> if it exists, otherwise throw an error.</p>
+<p>For example, let's say you have an <code>nn.Module</code> <code>A</code> that looks like this:  .. code-block:: text      A(         (net_b): Module(             (net_c): Module(                 (conv): Conv2d(16, 33, kernel_size=(3, 3), stride=(2, 2))             )             (linear): Linear(in_features=100, out_features=200, bias=True)         )     )  (The diagram shows an <code>nn.Module</code> <code>A</code>. <code>A</code> has a nested submodule <code>net_b</code>, which itself has two submodules <code>net_c</code> and <code>linear</code>. <code>net_c</code> then has a submodule <code>conv</code>.)  To overide the <code>Conv2d</code> with a new submodule <code>Linear</code>, you would call <code>set_submodule("net_b.net_c.conv", nn.Linear(33, 16))</code>.  Args:     target: The fully-qualified string name of the submodule         to look for. (See above example for how to specify a         fully-qualified string.)     module: The module to set the submodule to.  Raises:     ValueError: If the target string is empty     AttributeError: If the target string references an invalid         path or resolves to something that is not an         <code>nn.Module</code></p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>target</strong>     (<em>str</em>)    </li>
+<li><strong>module</strong>     (<em>'Module'</em>)    </li>
 </ul>
 </details>
 <details class="- note">

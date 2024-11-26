@@ -452,6 +452,8 @@
       
         
       
+        
+      
     
     
       
@@ -551,6 +553,53 @@
   
   <span class="md-ellipsis">
     evaluation
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../hf-hub/PylateModelCardData/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    hf_hub
   </span>
   
 
@@ -887,10 +936,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" checked>
         
           
-          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -901,8 +950,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_9">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_10">
             <span class="md-nav__icon md-icon"></span>
             utils
           </label>
@@ -1147,15 +1196,20 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>queries</strong> (<em>datasets.arrow_dataset.Dataset</em>)</p>
+<p><strong>queries</strong> (<em>datasets.arrow_dataset.Dataset | datasets.dataset_dict.DatasetDict</em>)</p>
 <p>Queries dataset.</p>
 </li>
 <li>
-<p><strong>documents</strong> (<em>datasets.arrow_dataset.Dataset</em>)</p>
+<p><strong>documents</strong> (<em>datasets.arrow_dataset.Dataset | datasets.dataset_dict.DatasetDict</em>)</p>
 <p>Documents dataset.</p>
 </li>
 <li>
+<p><strong>split</strong> (<em>str</em>) – defaults to <code>train</code></p>
+<p>Split to use for the queries and documents datasets. Used only if the queries and documents are of type <code>datasets.DatasetDict</code>.</p>
+</li>
+<li>
 <p><strong>n_ways</strong> (<em>int</em>) – defaults to <code>32</code></p>
+<p>Number of scores to keep for the distillation.</p>
 </li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
