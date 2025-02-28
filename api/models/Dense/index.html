@@ -532,6 +532,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -985,6 +989,8 @@
       
         
       
+        
+      
     
     
       
@@ -1001,7 +1007,7 @@
         
   
   
-    <a href="../../scores/colbert-kd-scores/" class="md-nav__link">
+    <a href="../../scores/SimilarityFunction/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -1154,26 +1160,26 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>in_features</strong> (<em>int</em>)</p>
+<p><strong>in_features</strong> (<em>'int'</em>)</p>
 <p>Size of the embeddings in output of the tansformer.</p>
 </li>
 <li>
-<p><strong>out_features</strong> (<em>int</em>)</p>
+<p><strong>out_features</strong> (<em>'int'</em>)</p>
 <p>Size of the output embeddings after linear projection</p>
 </li>
 <li>
-<p><strong>bias</strong> (<em>bool</em>) – defaults to <code>True</code></p>
+<p><strong>bias</strong> (<em>'bool'</em>) – defaults to <code>True</code></p>
 <p>Add a bias vector</p>
 </li>
 <li>
 <p><strong>activation_function</strong> – defaults to <code>Identity()</code></p>
 </li>
 <li>
-<p><strong>init_weight</strong> (<em>torch.Tensor</em>) – defaults to <code>None</code></p>
+<p><strong>init_weight</strong> (<em>'torch.Tensor'</em>) – defaults to <code>None</code></p>
 <p>Initial value for the matrix of the linear layer</p>
 </li>
 <li>
-<p><strong>init_bias</strong> (<em>torch.Tensor</em>) – defaults to <code>None</code></p>
+<p><strong>init_bias</strong> (<em>'torch.Tensor'</em>) – defaults to <code>None</code></p>
 <p>Initial value for the bias of the linear layer.</p>
 </li>
 </ul>
@@ -1291,14 +1297,14 @@
 <p>Performs linear projection on the token embeddings.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>features</strong>     (<em>dict[str, torch.Tensor]</em>)    </li>
+<li><strong>features</strong>     (<em>'dict[str, torch.Tensor]'</em>)    </li>
 </ul>
 </details>
 <details class="- note">
 <summary>from_sentence_transformers</summary>
 <p>Converts a SentenceTransformer Dense model to a Dense model. Our Dense model does not have the activation function.</p>
 <ul>
-<li><strong>dense</strong>     (<em>sentence_transformers.models.Dense.Dense</em>)    </li>
+<li><strong>dense</strong>     (<em>'DenseSentenceTransformer'</em>)    </li>
 </ul>
 </details>
 <details class="- note">
@@ -1306,12 +1312,12 @@
 <p>Load the weight of the Dense layer using weights from a stanford-nlp checkpoint.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>model_name_or_path</strong>     (<em>str | os.PathLike</em>)    </li>
-<li><strong>cache_folder</strong>     (<em>str | os.PathLike | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>revision</strong>     (<em>str | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>local_files_only</strong>     (<em>bool | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>token</strong>     (<em>str | bool | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>use_auth_token</strong>     (<em>str | bool | None</em>)     – defaults to <code>None</code>    </li>
+<li><strong>model_name_or_path</strong>     (<em>'str | os.PathLike'</em>)    </li>
+<li><strong>cache_folder</strong>     (<em>'str | os.PathLike | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>revision</strong>     (<em>'str | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>local_files_only</strong>     (<em>'bool | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>token</strong>     (<em>'str | bool | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>use_auth_token</strong>     (<em>'str | bool | None'</em>)     – defaults to <code>None</code>    </li>
 </ul>
 </details>
 <details class="- note">

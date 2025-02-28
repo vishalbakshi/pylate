@@ -532,6 +532,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -994,6 +998,8 @@
       
         
       
+        
+      
     
     
       
@@ -1010,7 +1016,7 @@
         
   
   
-    <a href="../../scores/colbert-kd-scores/" class="md-nav__link">
+    <a href="../../scores/SimilarityFunction/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -1172,110 +1178,110 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>model_name_or_path</strong> (<em>str | None</em>) – defaults to <code>None</code></p>
+<p><strong>model_name_or_path</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 <p>If it is a filepath on disc, it loads the model from that path. If it is not a path, it first tries to download a pre-trained SentenceTransformer model. If that fails, tries to construct a model from the Hugging Face Hub with that name.</p>
 </li>
 <li>
-<p><strong>modules</strong> (<em>Optional[Iterable[torch.nn.modules.module.Module]]</em>) – defaults to <code>None</code></p>
+<p><strong>modules</strong> (<em>'Optional[Iterable[nn.Module]]'</em>) – defaults to <code>None</code></p>
 <p>A list of torch Modules that should be called sequentially, can be used to create custom SentenceTransformer models from scratch.</p>
 </li>
 <li>
-<p><strong>device</strong> (<em>str | None</em>) – defaults to <code>None</code></p>
+<p><strong>device</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 <p>Device (like "cuda", "cpu", "mps", "npu") that should be used for computation. If None, checks if a GPU can be used.</p>
 </li>
 <li>
-<p><strong>prompts</strong> (<em>dict[str, str] | None</em>) – defaults to <code>None</code></p>
+<p><strong>prompts</strong> (<em>'dict[str, str] | None'</em>) – defaults to <code>None</code></p>
 <p>A dictionary with prompts for the model. The key is the prompt name, the value is the prompt text. The prompt text will be prepended before any text to encode. For example: <code>{"query": "query: ", "passage": "passage: "}</code> or <code>{"clustering": "Identify the main category based on the titles in "}</code>.</p>
 </li>
 <li>
-<p><strong>default_prompt_name</strong> (<em>str | None</em>) – defaults to <code>None</code></p>
+<p><strong>default_prompt_name</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 <p>The name of the prompt that should be used by default. If not set, no prompt will be applied.</p>
 </li>
 <li>
-<p><strong>similarity_fn_name</strong> (<em>Union[str, sentence_transformers.similarity_functions.SimilarityFunction, NoneType]</em>) – defaults to <code>None</code></p>
+<p><strong>similarity_fn_name</strong> (<em>'Optional[str | SimilarityFunction]'</em>) – defaults to <code>None</code></p>
 <p>The name of the similarity function to use. Valid options are "cosine", "dot", "euclidean", and "manhattan". If not set, it is automatically set to "cosine" if <code>similarity</code> or <code>similarity_pairwise</code> are called while <code>model.similarity_fn_name</code> is still <code>None</code>.</p>
 </li>
 <li>
-<p><strong>cache_folder</strong> (<em>str | None</em>) – defaults to <code>None</code></p>
+<p><strong>cache_folder</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 <p>Path to store models. Can also be set by the SENTENCE_TRANSFORMERS_HOME environment variable.</p>
 </li>
 <li>
-<p><strong>trust_remote_code</strong> (<em>bool</em>) – defaults to <code>False</code></p>
+<p><strong>trust_remote_code</strong> (<em>'bool'</em>) – defaults to <code>False</code></p>
 <p>Whether or not to allow for custom models defined on the Hub in their own modeling files. This option should only be set to True for repositories you trust and in which you have read the code, as it will execute code present on the Hub on your local machine.</p>
 </li>
 <li>
-<p><strong>revision</strong> (<em>str | None</em>) – defaults to <code>None</code></p>
+<p><strong>revision</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 <p>The specific model version to use. It can be a branch name, a tag name, or a commit id, for a stored model on Hugging Face.</p>
 </li>
 <li>
-<p><strong>local_files_only</strong> (<em>bool</em>) – defaults to <code>False</code></p>
+<p><strong>local_files_only</strong> (<em>'bool'</em>) – defaults to <code>False</code></p>
 <p>Whether or not to only look at local files (i.e., do not try to download the model).</p>
 </li>
 <li>
-<p><strong>token</strong> (<em>bool | str | None</em>) – defaults to <code>None</code></p>
+<p><strong>token</strong> (<em>'bool | str | None'</em>) – defaults to <code>None</code></p>
 <p>Hugging Face authentication token to download private models.</p>
 </li>
 <li>
-<p><strong>use_auth_token</strong> (<em>bool | str | None</em>) – defaults to <code>None</code></p>
+<p><strong>use_auth_token</strong> (<em>'bool | str | None'</em>) – defaults to <code>None</code></p>
 <p>Deprecated argument. Please use <code>token</code> instead.</p>
 </li>
 <li>
-<p><strong>truncate_dim</strong> (<em>int | None</em>) – defaults to <code>None</code></p>
+<p><strong>truncate_dim</strong> (<em>'int | None'</em>) – defaults to <code>None</code></p>
 <p>The dimension to truncate sentence embeddings to. <code>None</code> does no truncation. Truncation is only applicable during inference when :meth:<code>SentenceTransformer.encode</code> is called.</p>
 </li>
 <li>
-<p><strong>embedding_size</strong> (<em>int | None</em>) – defaults to <code>None</code></p>
+<p><strong>embedding_size</strong> (<em>'int | None'</em>) – defaults to <code>None</code></p>
 <p>The output size of the projection layer. Default to 128.</p>
 </li>
 <li>
-<p><strong>bias</strong> (<em>bool</em>) – defaults to <code>False</code></p>
+<p><strong>bias</strong> (<em>'bool'</em>) – defaults to <code>False</code></p>
 </li>
 <li>
-<p><strong>query_prefix</strong> (<em>str | None</em>) – defaults to <code>None</code></p>
+<p><strong>query_prefix</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 <p>Prefix to add to the queries.</p>
 </li>
 <li>
-<p><strong>document_prefix</strong> (<em>str | None</em>) – defaults to <code>None</code></p>
+<p><strong>document_prefix</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 <p>Prefix to add to the documents.</p>
 </li>
 <li>
-<p><strong>add_special_tokens</strong> (<em>bool</em>) – defaults to <code>True</code></p>
+<p><strong>add_special_tokens</strong> (<em>'bool'</em>) – defaults to <code>True</code></p>
 <p>Add the prefix to the inputs.</p>
 </li>
 <li>
-<p><strong>truncation</strong> (<em>bool</em>) – defaults to <code>True</code></p>
+<p><strong>truncation</strong> (<em>'bool'</em>) – defaults to <code>True</code></p>
 <p>Truncate the inputs to the encoder max lengths or use sliding window encoding.</p>
 </li>
 <li>
-<p><strong>query_length</strong> (<em>int | None</em>) – defaults to <code>None</code></p>
+<p><strong>query_length</strong> (<em>'int | None'</em>) – defaults to <code>None</code></p>
 <p>The length of the query to truncate/pad to with mask tokens. If set, will override the config value. Default to 32.</p>
 </li>
 <li>
-<p><strong>document_length</strong> (<em>int | None</em>) – defaults to <code>None</code></p>
+<p><strong>document_length</strong> (<em>'int | None'</em>) – defaults to <code>None</code></p>
 <p>The max length of the document to truncate. If set, will override the config value. Default to 180.</p>
 </li>
 <li>
-<p><strong>attend_to_expansion_tokens</strong> (<em>bool</em>) – defaults to <code>False</code></p>
+<p><strong>attend_to_expansion_tokens</strong> (<em>'bool | None'</em>) – defaults to <code>None</code></p>
 <p>Whether to attend to the expansion tokens in the attention layers model. If False, the original tokens will not only attend to the expansion tokens, only the expansion tokens will attend to the original tokens. Default is False (as in the original ColBERT codebase).</p>
 </li>
 <li>
-<p><strong>skiplist_words</strong> (<em>list[str] | None</em>) – defaults to <code>None</code></p>
+<p><strong>skiplist_words</strong> (<em>'list[str] | None'</em>) – defaults to <code>None</code></p>
 <p>A list of words to skip from the documents scoring (note that these tokens are used for encoding and are only skipped during the scoring). Default is the list of string.punctuation.</p>
 </li>
 <li>
-<p><strong>model_kwargs</strong> (<em>dict | None</em>) – defaults to <code>None</code></p>
+<p><strong>model_kwargs</strong> (<em>'dict | None'</em>) – defaults to <code>None</code></p>
 <p>Additional model configuration parameters to be passed to the Huggingface Transformers model. Particularly useful options are:  - <code>torch_dtype</code>: Override the default <code>torch.dtype</code> and load the model under a specific <code>dtype</code>. The     different options are:          1. <code>torch.float16</code>, <code>torch.bfloat16</code> or <code>torch.float</code>: load in a specified <code>dtype</code>,         ignoring the model's <code>config.torch_dtype</code> if one exists. If not specified - the model will get         loaded in <code>torch.float</code> (fp32).          2. <code>"auto"</code> - A <code>torch_dtype</code> entry in the <code>config.json</code> file of the model will be attempted         to be used. If this entry isn't found then next check the <code>dtype</code> of the first weight in the         checkpoint that's of a floating point type and use that as <code>dtype</code>. This will load the model using         the <code>dtype</code> it was saved in at the end of the training. It can't be used as an indicator of how the         model was trained. Since it could be trained in one of half precision dtypes, but saved in fp32. - <code>attn_implementation</code>: The attention implementation to use in the model (if relevant). Can be any of     <code>"eager"</code> (manual implementation of the attention), <code>"sdpa"</code> (using <code>F.scaled_dot_product_attention     &lt;https://pytorch.org/docs/master/generated/torch.nn.functional.scaled_dot_product_attention.html&gt;</code><em>),     or <code>"flash_attention_2"</code> (using <code>Dao-AILab/flash-attention     &lt;https://github.com/Dao-AILab/flash-attention&gt;</code></em>). By default, if available, SDPA will be used for     torch&gt;=2.1.1. The default is otherwise the manual <code>"eager"</code> implementation.  See the <code>PreTrainedModel.from_pretrained &lt;https://huggingface.co/docs/transformers/en/main_classes/model#transformers.PreTrainedModel.from_pretrained&gt;</code>_ documentation for more details.</p>
 </li>
 <li>
-<p><strong>tokenizer_kwargs</strong> (<em>dict | None</em>) – defaults to <code>None</code></p>
+<p><strong>tokenizer_kwargs</strong> (<em>'dict | None'</em>) – defaults to <code>None</code></p>
 <p>Additional tokenizer configuration parameters to be passed to the Huggingface Transformers tokenizer. See the <code>AutoTokenizer.from_pretrained &lt;https://huggingface.co/docs/transformers/en/model_doc/auto#transformers.AutoTokenizer.from_pretrained&gt;</code>_ documentation for more details.</p>
 </li>
 <li>
-<p><strong>config_kwargs</strong> (<em>dict | None</em>) – defaults to <code>None</code></p>
+<p><strong>config_kwargs</strong> (<em>'dict | None'</em>) – defaults to <code>None</code></p>
 <p>Additional model configuration parameters to be passed to the Huggingface Transformers config. See the <code>AutoConfig.from_pretrained &lt;https://huggingface.co/docs/transformers/en/model_doc/auto#transformers.AutoConfig.from_pretrained&gt;</code>_ documentation for more details.</p>
 </li>
 <li>
-<p><strong>model_card_data</strong> (<em>pylate.hf_hub.model_card.PylateModelCardData | None</em>) – defaults to <code>None</code></p>
+<p><strong>model_card_data</strong> (<em>'PylateModelCardData | None'</em>) – defaults to <code>None</code></p>
 <p>A model card data object that contains information about the model. This is used to generate a model card when saving the model. If not set, a default model card data object is created.</p>
 </li>
 </ul>
@@ -1291,15 +1297,15 @@
 </li>
 <li>
 <p><strong>similarity</strong></p>
-<p>Compute the similarity between two collections of embeddings. The output will be a matrix with the similarity scores between all embeddings from the first parameter and all embeddings from the second parameter. This differs from <code>similarity_pairwise</code> which computes the similarity between each pair of embeddings.  Args:     embeddings1 (Union[Tensor, ndarray]): [num_embeddings_1, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.     embeddings2 (Union[Tensor, ndarray]): [num_embeddings_2, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.  Returns:     Tensor: A [num_embeddings_1, num_embeddings_2]-shaped torch tensor with similarity scores.  Example:     ::          &gt;&gt;&gt; model = SentenceTransformer("all-mpnet-base-v2")         &gt;&gt;&gt; sentences = [         ...     "The weather is so nice!",         ...     "It's so sunny outside.",         ...     "He's driving to the movie theater.",         ...     "She's going to the cinema.",         ... ]         &gt;&gt;&gt; embeddings = model.encode(sentences, normalize_embeddings=True)         &gt;&gt;&gt; model.similarity(embeddings, embeddings)         tensor([[1.0000, 0.7235, 0.0290, 0.1309],                 [0.7235, 1.0000, 0.0613, 0.1129],                 [0.0290, 0.0613, 1.0000, 0.5027],                 [0.1309, 0.1129, 0.5027, 1.0000]])         &gt;&gt;&gt; model.similarity_fn_name         "cosine"         &gt;&gt;&gt; model.similarity_fn_name = "euclidean"         &gt;&gt;&gt; model.similarity(embeddings, embeddings)         tensor([[-0.0000, -0.7437, -1.3935, -1.3184],                 [-0.7437, -0.0000, -1.3702, -1.3320],                 [-1.3935, -1.3702, -0.0000, -0.9973],                 [-1.3184, -1.3320, -0.9973, -0.0000]])</p>
+<p>Compute the similarity between two collections of embeddings. The output will be a matrix with the similarity scores between all embeddings from the first parameter and all embeddings from the second parameter. This differs from <code>similarity_pairwise</code> which computes the similarity between each pair of embeddings. This method supports only embeddings with fp32 precision and does not accommodate quantized embeddings.  Args:     embeddings1 (Union[Tensor, ndarray]): [num_embeddings_1, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.     embeddings2 (Union[Tensor, ndarray]): [num_embeddings_2, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.  Returns:     Tensor: A [num_embeddings_1, num_embeddings_2]-shaped torch tensor with similarity scores.  Example:     ::          &gt;&gt;&gt; model = SentenceTransformer("all-mpnet-base-v2")         &gt;&gt;&gt; sentences = [         ...     "The weather is so nice!",         ...     "It's so sunny outside.",         ...     "He's driving to the movie theater.",         ...     "She's going to the cinema.",         ... ]         &gt;&gt;&gt; embeddings = model.encode(sentences, normalize_embeddings=True)         &gt;&gt;&gt; model.similarity(embeddings, embeddings)         tensor([[1.0000, 0.7235, 0.0290, 0.1309],                 [0.7235, 1.0000, 0.0613, 0.1129],                 [0.0290, 0.0613, 1.0000, 0.5027],                 [0.1309, 0.1129, 0.5027, 1.0000]])         &gt;&gt;&gt; model.similarity_fn_name         "cosine"         &gt;&gt;&gt; model.similarity_fn_name = "euclidean"         &gt;&gt;&gt; model.similarity(embeddings, embeddings)         tensor([[-0.0000, -0.7437, -1.3935, -1.3184],                 [-0.7437, -0.0000, -1.3702, -1.3320],                 [-1.3935, -1.3702, -0.0000, -0.9973],                 [-1.3184, -1.3320, -0.9973, -0.0000]])</p>
 </li>
 <li>
 <p><strong>similarity_fn_name</strong></p>
-<p>Return the name of the similarity function used by :meth:<code>SentenceTransformer.similarity</code> and :meth:<code>SentenceTransformer.similarity_pairwise</code>.  Returns:     Optional[str]: The name of the similarity function. Can be None if not set, in which case it will         default to "cosine" when first called.  Example:     &gt;&gt;&gt; model = SentenceTransformer("multi-qa-mpnet-base-dot-v1")     &gt;&gt;&gt; model.similarity_fn_name     'dot'</p>
+<p>Return the name of the similarity function used by :meth:<code>SentenceTransformer.similarity</code> and :meth:<code>SentenceTransformer.similarity_pairwise</code>.  Returns:     Optional[str]: The name of the similarity function. Can be None if not set, in which case it will         default to "cosine" when first called. Examples -------- &gt;&gt;&gt; model = ColBERT("bert-base-uncased") &gt;&gt;&gt; model.similarity_fn_name     'MaxSim'</p>
 </li>
 <li>
 <p><strong>similarity_pairwise</strong></p>
-<p>Compute the similarity between two collections of embeddings. The output will be a vector with the similarity scores between each pair of embeddings.  Args:     embeddings1 (Union[Tensor, ndarray]): [num_embeddings, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.     embeddings2 (Union[Tensor, ndarray]): [num_embeddings, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.  Returns:     Tensor: A [num_embeddings]-shaped torch tensor with pairwise similarity scores.  Example:     ::          &gt;&gt;&gt; model = SentenceTransformer("all-mpnet-base-v2")         &gt;&gt;&gt; sentences = [         ...     "The weather is so nice!",         ...     "It's so sunny outside.",         ...     "He's driving to the movie theater.",         ...     "She's going to the cinema.",         ... ]         &gt;&gt;&gt; embeddings = model.encode(sentences, normalize_embeddings=True)         &gt;&gt;&gt; model.similarity_pairwise(embeddings[::2], embeddings[1::2])         tensor([0.7235, 0.5027])         &gt;&gt;&gt; model.similarity_fn_name         "cosine"         &gt;&gt;&gt; model.similarity_fn_name = "euclidean"         &gt;&gt;&gt; model.similarity_pairwise(embeddings[::2], embeddings[1::2])         tensor([-0.7437, -0.9973])</p>
+<p>Compute the similarity between two collections of embeddings. The output will be a vector with the similarity scores between each pair of embeddings. This method supports only embeddings with fp32 precision and does not accommodate quantized embeddings.  Args:     embeddings1 (Union[Tensor, ndarray]): [num_embeddings, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.     embeddings2 (Union[Tensor, ndarray]): [num_embeddings, embedding_dim] or [embedding_dim]-shaped numpy array or torch tensor.  Returns:     Tensor: A [num_embeddings]-shaped torch tensor with pairwise similarity scores.  Example:     ::          &gt;&gt;&gt; model = SentenceTransformer("all-mpnet-base-v2")         &gt;&gt;&gt; sentences = [         ...     "The weather is so nice!",         ...     "It's so sunny outside.",         ...     "He's driving to the movie theater.",         ...     "She's going to the cinema.",         ... ]         &gt;&gt;&gt; embeddings = model.encode(sentences, normalize_embeddings=True)         &gt;&gt;&gt; model.similarity_pairwise(embeddings[::2], embeddings[1::2])         tensor([0.7235, 0.5027])         &gt;&gt;&gt; model.similarity_fn_name         "cosine"         &gt;&gt;&gt; model.similarity_fn_name = "euclidean"         &gt;&gt;&gt; model.similarity_pairwise(embeddings[::2], embeddings[1::2])         tensor([-0.7437, -0.9973])</p>
 </li>
 <li>
 <p><strong>tokenizer</strong></p>
@@ -1473,21 +1479,21 @@
 <p>Computes sentence embeddings.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>sentences</strong>     (<em>str | list[str]</em>)    </li>
-<li><strong>prompt_name</strong>     (<em>str | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>prompt</strong>     (<em>str | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>batch_size</strong>     (<em>int</em>)     – defaults to <code>32</code>    </li>
-<li><strong>show_progress_bar</strong>     (<em>bool</em>)     – defaults to <code>None</code>    </li>
-<li><strong>precision</strong>     (<em>Literal['float32', 'int8', 'uint8', 'binary', 'ubinary']</em>)     – defaults to <code>float32</code>    </li>
-<li><strong>convert_to_numpy</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
-<li><strong>convert_to_tensor</strong>     (<em>bool</em>)     – defaults to <code>False</code>    </li>
-<li><strong>padding</strong>     (<em>bool</em>)     – defaults to <code>False</code>    </li>
-<li><strong>device</strong>     (<em>str</em>)     – defaults to <code>None</code>  <br />
+<li><strong>sentences</strong>     (<em>'str | list[str]'</em>)    </li>
+<li><strong>prompt_name</strong>     (<em>'str | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>prompt</strong>     (<em>'str | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>batch_size</strong>     (<em>'int'</em>)     – defaults to <code>32</code>    </li>
+<li><strong>show_progress_bar</strong>     (<em>'bool'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>precision</strong>     (<em>"Literal['float32', 'int8', 'uint8', 'binary', 'ubinary']"</em>)     – defaults to <code>float32</code>    </li>
+<li><strong>convert_to_numpy</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
+<li><strong>convert_to_tensor</strong>     (<em>'bool'</em>)     – defaults to <code>False</code>    </li>
+<li><strong>padding</strong>     (<em>'bool'</em>)     – defaults to <code>False</code>    </li>
+<li><strong>device</strong>     (<em>'str'</em>)     – defaults to <code>None</code>  <br />
     Device (like "cuda", "cpu", "mps", "npu") that should be used for computation. If None, checks if a GPU can be used.</li>
-<li><strong>normalize_embeddings</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
-<li><strong>is_query</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
-<li><strong>pool_factor</strong>     (<em>int</em>)     – defaults to <code>1</code>    </li>
-<li><strong>protected_tokens</strong>     (<em>int</em>)     – defaults to <code>1</code>    </li>
+<li><strong>normalize_embeddings</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
+<li><strong>is_query</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
+<li><strong>pool_factor</strong>     (<em>'int'</em>)     – defaults to <code>1</code>    </li>
+<li><strong>protected_tokens</strong>     (<em>'int'</em>)     – defaults to <code>1</code>    </li>
 </ul>
 </details>
 <details class="- note">
@@ -1495,18 +1501,18 @@
 <p>Encodes a list of sentences using multiple processes and GPUs via :meth:<code>SentenceTransformer.encode &lt;sentence_transformers.SentenceTransformer.encode&gt;</code>. The sentences are chunked into smaller packages and sent to individual processes, which encode them on different GPUs or CPUs. This method is only suitable for encoding large sets of sentences.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>sentences</strong>     (<em>list[str]</em>)    </li>
-<li><strong>pool</strong>     (<em>dict[str, object]</em>)    </li>
-<li><strong>prompt_name</strong>     (<em>str | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>prompt</strong>     (<em>str | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>batch_size</strong>     (<em>int</em>)     – defaults to <code>32</code>    </li>
-<li><strong>chunk_size</strong>     (<em>int</em>)     – defaults to <code>None</code>    </li>
-<li><strong>precision</strong>     (<em>Literal['float32', 'int8', 'uint8', 'binary', 'ubinary']</em>)     – defaults to <code>float32</code>    </li>
-<li><strong>normalize_embeddings</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
-<li><strong>padding</strong>     (<em>bool</em>)     – defaults to <code>False</code>    </li>
-<li><strong>is_query</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
-<li><strong>pool_factor</strong>     (<em>int</em>)     – defaults to <code>1</code>    </li>
-<li><strong>protected_tokens</strong>     (<em>int</em>)     – defaults to <code>1</code>    </li>
+<li><strong>sentences</strong>     (<em>'list[str]'</em>)    </li>
+<li><strong>pool</strong>     (<em>'dict[str, object]'</em>)    </li>
+<li><strong>prompt_name</strong>     (<em>'str | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>prompt</strong>     (<em>'str | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>batch_size</strong>     (<em>'int'</em>)     – defaults to <code>32</code>    </li>
+<li><strong>chunk_size</strong>     (<em>'int'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>precision</strong>     (<em>"Literal['float32', 'int8', 'uint8', 'binary', 'ubinary']"</em>)     – defaults to <code>float32</code>    </li>
+<li><strong>normalize_embeddings</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
+<li><strong>padding</strong>     (<em>'bool'</em>)     – defaults to <code>False</code>    </li>
+<li><strong>is_query</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
+<li><strong>pool_factor</strong>     (<em>'int'</em>)     – defaults to <code>1</code>    </li>
+<li><strong>protected_tokens</strong>     (<em>'int'</em>)     – defaults to <code>1</code>    </li>
 </ul>
 </details>
 <details class="- note">
@@ -1653,8 +1659,8 @@
 <p>Inserts a prefix token at the beginning of each sequence in the input tensor.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>input_ids</strong>     (<em>torch.Tensor</em>)    </li>
-<li><strong>prefix_id</strong>     (<em>int</em>)    </li>
+<li><strong>input_ids</strong>     (<em>'torch.Tensor'</em>)    </li>
+<li><strong>prefix_id</strong>     (<em>'int'</em>)    </li>
 </ul>
 </details>
 <details class="- note">
@@ -1785,12 +1791,12 @@
 <p>Pools the embeddings hierarchically by clustering and averaging them.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>documents_embeddings</strong>     (<em>list[torch.Tensor]</em>)    </li>
-<li><strong>pool_factor</strong>     (<em>int</em>)     – defaults to <code>1</code>    </li>
-<li><strong>protected_tokens</strong>     (<em>int</em>)     – defaults to <code>1</code>    </li>
+<li><strong>documents_embeddings</strong>     (<em>'list[torch.Tensor]'</em>)    </li>
+<li><strong>pool_factor</strong>     (<em>'int'</em>)     – defaults to <code>1</code>    </li>
+<li><strong>protected_tokens</strong>     (<em>'int'</em>)     – defaults to <code>1</code>    </li>
 </ul>
 <p><strong>Returns</strong></p>
-<p><em>list</em>:     A list of pooled embeddings for each document.</p>
+<p><em>list[torch.Tensor]</em>:     A list of pooled embeddings for each document.</p>
 </details>
 <details class="- note">
 <summary>pop</summary>
@@ -1949,11 +1955,11 @@
 <p>Args:     path (str): Path on disc where the model will be saved.     model_name (str, optional): Optional model name.     create_model_card (bool, optional): If True, create a README.md with basic information about this model.     train_datasets (list[str], optional): Optional list with the names of the datasets used to train the model.     safe_serialization (bool, optional): If True, save the model using safetensors. If False, save the model         the traditional (but unsafe) PyTorch way.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>path</strong>     (<em>str</em>)    </li>
-<li><strong>model_name</strong>     (<em>str | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>create_model_card</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
-<li><strong>train_datasets</strong>     (<em>list[str] | None</em>)     – defaults to <code>None</code>    </li>
-<li><strong>safe_serialization</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
+<li><strong>path</strong>     (<em>'str'</em>)    </li>
+<li><strong>model_name</strong>     (<em>'str | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>create_model_card</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
+<li><strong>train_datasets</strong>     (<em>'list[str] | None'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>safe_serialization</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
 </ul>
 </details>
 <details class="- note">
@@ -2035,8 +2041,8 @@
 <p>Create a mask for the set of input_ids that are in the skiplist.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>input_ids</strong>     (<em>torch.Tensor</em>)    </li>
-<li><strong>skiplist</strong>     (<em>list[int]</em>)    </li>
+<li><strong>input_ids</strong>     (<em>'torch.Tensor'</em>)    </li>
+<li><strong>skiplist</strong>     (<em>'list[int]'</em>)    </li>
 </ul>
 </details>
 <details class="- note">
@@ -2053,7 +2059,7 @@
 <p>Starts a multi-process pool to process the encoding with several independent processes. This method is recommended if you want to encode on multiple GPUs or CPUs. It is advised to start only one process per GPU. This method works together with encode_multi_process and stop_multi_process_pool.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>target_devices</strong>     (<em>list[str]</em>)     – defaults to <code>None</code>    </li>
+<li><strong>target_devices</strong>     (<em>'list[str]'</em>)     – defaults to <code>None</code>    </li>
 </ul>
 <p><strong>Returns</strong></p>
 <p><em>dict</em>:     A dictionary with the target processes, an input queue, and an output queue.</p>
@@ -2105,9 +2111,9 @@
 <p>Args:     texts (Union[list[str], list[dict], list[tuple[str, str]]]): A list of texts to be tokenized.     is_query (bool): Flag to indicate if the texts are queries. Defaults to True.     pad_document (bool): Flag to indicate if documents should be padded to max length. Defaults to False.  Returns:     dict[str, torch.Tensor]: A dictionary of tensors with the tokenized texts, including "input_ids",         "attention_mask", and optionally "token_type_ids".</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>texts</strong>     (<em>list[str] | list[dict] | list[tuple[str, str]]</em>)    </li>
-<li><strong>is_query</strong>     (<em>bool</em>)     – defaults to <code>True</code>    </li>
-<li><strong>pad_document</strong>     (<em>bool</em>)     – defaults to <code>False</code>    </li>
+<li><strong>texts</strong>     (<em>'list[str] | list[dict] | list[tuple[str, str]]'</em>)    </li>
+<li><strong>is_query</strong>     (<em>'bool'</em>)     – defaults to <code>True</code>    </li>
+<li><strong>pad_document</strong>     (<em>'bool'</em>)     – defaults to <code>False</code>    </li>
 </ul>
 </details>
 <details class="- note">

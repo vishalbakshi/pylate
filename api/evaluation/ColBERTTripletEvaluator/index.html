@@ -18,7 +18,7 @@
         <link rel="prev" href="../ColBERTDistillationEvaluator/">
       
       
-        <link rel="next" href="../evaluate/">
+        <link rel="next" href="../NanoBEIREvaluator/">
       
       
       <link rel="icon" href="../../../img/favicon.ico">
@@ -534,6 +534,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -680,6 +684,48 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NanoBEIREvaluator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NanoBEIREvaluator
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PyLateInformationRetrievalEvaluator/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PyLateInformationRetrievalEvaluator
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1078,6 +1124,8 @@
       
         
       
+        
+      
     
     
       
@@ -1094,7 +1142,7 @@
         
   
   
-    <a href="../../scores/colbert-kd-scores/" class="md-nav__link">
+    <a href="../../scores/SimilarityFunction/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -1256,35 +1304,35 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>anchors</strong> (<em>list[str]</em>)</p>
+<p><strong>anchors</strong> (<em>'list[str]'</em>)</p>
 <p>Sentences to check similarity to. (e.g. a query)</p>
 </li>
 <li>
-<p><strong>positives</strong> (<em>list[str]</em>)</p>
+<p><strong>positives</strong> (<em>'list[str]'</em>)</p>
 <p>List of positive sentences</p>
 </li>
 <li>
-<p><strong>negatives</strong> (<em>list[str]</em>)</p>
+<p><strong>negatives</strong> (<em>'list[str]'</em>)</p>
 <p>List of negative sentences</p>
 </li>
 <li>
-<p><strong>name</strong> (<em>str</em>) – defaults to ``</p>
+<p><strong>name</strong> (<em>'str'</em>) – defaults to ``</p>
 <p>Name for the output.</p>
 </li>
 <li>
-<p><strong>batch_size</strong> (<em>int</em>) – defaults to <code>32</code></p>
+<p><strong>batch_size</strong> (<em>'int'</em>) – defaults to <code>32</code></p>
 <p>Batch size used to compute embeddings.</p>
 </li>
 <li>
-<p><strong>show_progress_bar</strong> (<em>bool</em>) – defaults to <code>False</code></p>
+<p><strong>show_progress_bar</strong> (<em>'bool'</em>) – defaults to <code>False</code></p>
 <p>If true, prints a progress bar.</p>
 </li>
 <li>
-<p><strong>write_csv</strong> (<em>bool</em>) – defaults to <code>True</code></p>
+<p><strong>write_csv</strong> (<em>'bool'</em>) – defaults to <code>True</code></p>
 <p>Wether or not to write results to a CSV file.</p>
 </li>
 <li>
-<p><strong>truncate_dim</strong> (<em>int | None</em>) – defaults to <code>None</code></p>
+<p><strong>truncate_dim</strong> (<em>'int | None'</em>) – defaults to <code>None</code></p>
 <p>The dimension to truncate sentence embeddings to. If None, do not truncate.</p>
 </li>
 </ul>
@@ -1343,10 +1391,10 @@
 <p>Evaluate the model on the triplet dataset. Measure the scoring between the anchor and the positive with every other positive and negative samples using HITS@K.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>model</strong>     (<em>pylate.models.colbert.ColBERT</em>)    </li>
-<li><strong>output_path</strong>     (<em>str</em>)     – defaults to <code>None</code>    </li>
-<li><strong>epoch</strong>     (<em>int</em>)     – defaults to <code>-1</code>    </li>
-<li><strong>steps</strong>     (<em>int</em>)     – defaults to <code>-1</code>    </li>
+<li><strong>model</strong>     (<em>'ColBERT'</em>)    </li>
+<li><strong>output_path</strong>     (<em>'str'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>epoch</strong>     (<em>'int'</em>)     – defaults to <code>-1</code>    </li>
+<li><strong>steps</strong>     (<em>'int'</em>)     – defaults to <code>-1</code>    </li>
 </ul>
 </details>
 <details class="- note">

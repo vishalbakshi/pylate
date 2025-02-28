@@ -12,13 +12,13 @@
         <meta name="author" content="Raphael Sourty">
       
       
-        <link rel="canonical" href="https://lightonai.github.io/pylate/api/evaluation/evaluate/">
+        <link rel="canonical" href="https://lightonai.github.io/pylate/api/evaluation/PyLateInformationRetrievalEvaluator/">
       
       
-        <link rel="prev" href="../PyLateInformationRetrievalEvaluator/">
+        <link rel="prev" href="../NanoBEIREvaluator/">
       
       
-        <link rel="next" href="../get-beir-triples/">
+        <link rel="next" href="../evaluate/">
       
       
       <link rel="icon" href="../../../img/favicon.ico">
@@ -26,7 +26,7 @@
     
     
       
-        <title>evaluate - pylate</title>
+        <title>PyLateInformationRetrievalEvaluator - pylate</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#evaluate" class="md-skip">
+        <a href="#pylateinformationretrievalevaluator" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              evaluate
+              PyLateInformationRetrievalEvaluator
             
           </span>
         </div>
@@ -638,27 +638,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../PyLateInformationRetrievalEvaluator/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PyLateInformationRetrievalEvaluator
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -675,7 +654,7 @@
           
   
   <span class="md-ellipsis">
-    evaluate
+    PyLateInformationRetrievalEvaluator
   </span>
   
 
@@ -686,7 +665,7 @@
         
   
   <span class="md-ellipsis">
-    evaluate
+    PyLateInformationRetrievalEvaluator
   </span>
   
 
@@ -717,9 +696,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
+  <a href="#attributes" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Attributes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
     </span>
   </a>
   
@@ -729,6 +717,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evaluate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    evaluate
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1240,9 +1249,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
+  <a href="#attributes" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
+      Attributes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
     </span>
   </a>
   
@@ -1263,48 +1281,111 @@
                   
 
 
-<h1 id="evaluate">evaluate<a class="headerlink" href="#evaluate" title="Permanent link">&para;</a></h1>
-<p>Evaluate candidates matchs.</p>
+<h1 id="pylateinformationretrievalevaluator">PyLateInformationRetrievalEvaluator<a class="headerlink" href="#pylateinformationretrievalevaluator" title="Permanent link">&para;</a></h1>
+<p>This class evaluates an Information Retrieval (IR) setting. This is a direct extension of the InformationRetrievalEvaluator from the sentence-transformers library, only override the compute_metrices method to be compilatible with PyLate models (define assymetric encoding using is_query params and add padding).</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>scores</strong> (<em>'list[list[dict]]'</em>)</p>
+<p><strong>queries</strong> (<em>'dict[str, str]'</em>)</p>
 </li>
 <li>
-<p><strong>qrels</strong> (<em>'dict'</em>)</p>
-<p>Qrels.</p>
+<p><strong>corpus</strong> (<em>'dict[str, str]'</em>)</p>
 </li>
 <li>
-<p><strong>queries</strong> (<em>'list[str]'</em>)</p>
-<p>index of queries of qrels.</p>
+<p><strong>relevant_docs</strong> (<em>'dict[str, set[str]]'</em>)</p>
 </li>
 <li>
-<p><strong>metrics</strong> (<em>'list | None'</em>) – defaults to <code>None</code></p>
-<p>Metrics to compute.</p>
+<p><strong>corpus_chunk_size</strong> (<em>'int'</em>) – defaults to <code>50000</code></p>
+</li>
+<li>
+<p><strong>mrr_at_k</strong> (<em>'list[int]'</em>) – defaults to <code>[10]</code></p>
+</li>
+<li>
+<p><strong>ndcg_at_k</strong> (<em>'list[int]'</em>) – defaults to <code>[10]</code></p>
+</li>
+<li>
+<p><strong>accuracy_at_k</strong> (<em>'list[int]'</em>) – defaults to <code>[1, 3, 5, 10]</code></p>
+</li>
+<li>
+<p><strong>precision_recall_at_k</strong> (<em>'list[int]'</em>) – defaults to <code>[1, 3, 5, 10]</code></p>
+</li>
+<li>
+<p><strong>map_at_k</strong> (<em>'list[int]'</em>) – defaults to <code>[100]</code></p>
+</li>
+<li>
+<p><strong>show_progress_bar</strong> (<em>'bool'</em>) – defaults to <code>False</code></p>
+</li>
+<li>
+<p><strong>batch_size</strong> (<em>'int'</em>) – defaults to <code>32</code></p>
+</li>
+<li>
+<p><strong>name</strong> (<em>'str'</em>) – defaults to ``</p>
+</li>
+<li>
+<p><strong>write_csv</strong> (<em>'bool'</em>) – defaults to <code>True</code></p>
+</li>
+<li>
+<p><strong>truncate_dim</strong> (<em>'int | None'</em>) – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>score_functions</strong> (<em>'dict[str, Callable[[Tensor, Tensor], Tensor]] | None'</em>) – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>main_score_function</strong> (<em>'str | SimilarityFunction | None'</em>) – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>query_prompt</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>query_prompt_name</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>corpus_prompt</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>corpus_prompt_name</strong> (<em>'str | None'</em>) – defaults to <code>None</code></p>
 </li>
 </ul>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">evaluation</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span>
-<span class="o">...</span>     <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">}],</span>
-<span class="o">...</span>     <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">}],</span>
-<span class="o">...</span> <span class="p">]</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">qrels</span> <span class="o">=</span> <span class="p">{</span>
-<span class="o">...</span>     <span class="s2">&quot;query1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-<span class="o">...</span>     <span class="s2">&quot;query2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-<span class="o">...</span> <span class="p">}</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;query1&quot;</span><span class="p">,</span> <span class="s2">&quot;query2&quot;</span><span class="p">]</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="n">evaluation</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-<span class="o">...</span>     <span class="n">scores</span><span class="o">=</span><span class="n">scores</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">qrels</span><span class="o">=</span><span class="n">qrels</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">queries</span><span class="o">=</span><span class="n">queries</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ndcg@10&quot;</span><span class="p">,</span> <span class="s2">&quot;hits@1&quot;</span><span class="p">],</span>
-<span class="o">...</span> <span class="p">)</span>
-</code></pre></div>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>description</strong></p>
+<p>Returns a human-readable description of the evaluator: BinaryClassificationEvaluator -&gt; Binary Classification  1. Remove "Evaluator" from the class name 2. Add a space before every capital letter</p>
+</li>
+</ul>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<details class="- note">
+<summary><strong>call</strong></summary>
+<p>This is called during training to evaluate the model. It returns a score for the evaluation with a higher score indicating a better result.</p>
+<p>Args:     model: the model to evaluate     output_path: path where predictions and metrics are written         to     epoch: the epoch where the evaluation takes place. This is         used for the file prefixes. If this is -1, then we         assume evaluation on test data.     steps: the steps in the current epoch at time of the         evaluation. This is used for the file prefixes. If this         is -1, then we assume evaluation at the end of the         epoch.  Returns:     Either a score for the evaluation with a higher score     indicating a better result, or a dictionary with scores. If     the latter is chosen, then <code>evaluator.primary_metric</code> must     be defined</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>model</strong>     (<em>'SentenceTransformer'</em>)    </li>
+<li><strong>output_path</strong>     (<em>'str'</em>)     – defaults to <code>None</code>    </li>
+<li><strong>epoch</strong>     (<em>'int'</em>)     – defaults to <code>-1</code>    </li>
+<li><strong>steps</strong>     (<em>'int'</em>)     – defaults to <code>-1</code>    </li>
+<li><strong>args</strong>    </li>
+<li><strong>kwargs</strong>    </li>
+</ul>
+</details>
+<details class="- note">
+<summary>compute_dcg_at_k</summary>
+</details>
+<details class="- note">
+<summary>compute_metrices</summary>
+</details>
+<details class="- note">
+<summary>compute_metrics</summary>
+</details>
+<details class="- note">
+<summary>output_scores</summary>
+</details>
+<details class="- note">
+<summary>prefix_name_to_metrics</summary>
+</details>
+<details class="- note">
+<summary>store_metrics_in_model_card_data</summary>
+</details>
 
 
 

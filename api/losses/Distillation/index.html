@@ -532,6 +532,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -985,6 +989,8 @@
       
         
       
+        
+      
     
     
       
@@ -1001,7 +1007,7 @@
         
   
   
-    <a href="../../scores/colbert-kd-scores/" class="md-nav__link">
+    <a href="../../scores/SimilarityFunction/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -1154,19 +1160,19 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>model</strong> (<em><a href="../../models/ColBERT">models.ColBERT</a></em>)</p>
+<p><strong>model</strong> (<em>'ColBERT'</em>)</p>
 <p>SentenceTransformer model.</p>
 </li>
 <li>
-<p><strong>score_metric</strong> (<em>Callable</em>) – defaults to <code>&lt;function colbert_kd_scores at 0x14f845bd0&gt;</code></p>
+<p><strong>score_metric</strong> (<em>'Callable'</em>) – defaults to <code>&lt;function colbert_kd_scores at 0x16a48f7f0&gt;</code></p>
 <p>Function that returns a score between two sequences of embeddings.</p>
 </li>
 <li>
-<p><strong>size_average</strong> (<em>bool</em>) – defaults to <code>True</code></p>
+<p><strong>size_average</strong> (<em>'bool'</em>) – defaults to <code>True</code></p>
 <p>Average by the size of the mini-batch or perform sum.</p>
 </li>
 <li>
-<p><strong>normalize_scores</strong> (<em>bool</em>) – defaults to <code>True</code></p>
+<p><strong>normalize_scores</strong> (<em>'bool'</em>) – defaults to <code>True</code></p>
 </li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -1294,8 +1300,8 @@
 <p>Computes the distillation loss with respect to SentenceTransformer.</p>
 <p><strong>Parameters</strong></p>
 <ul>
-<li><strong>sentence_features</strong>     (<em>Iterable[dict[str, torch.Tensor]]</em>)    </li>
-<li><strong>labels</strong>     (<em>torch.Tensor</em>)    </li>
+<li><strong>sentence_features</strong>     (<em>'Iterable[dict[str, torch.Tensor]]'</em>)    </li>
+<li><strong>labels</strong>     (<em>'torch.Tensor'</em>)    </li>
 </ul>
 </details>
 <details class="- note">

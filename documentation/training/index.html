@@ -861,6 +861,11 @@
 <p>Please note that for multi-GPU training, running <code>python training.py</code> <strong>will use Data Parallel (DP) by default</strong>. We strongly suggest using using Distributed Data Parallelism (DDP) using accelerate or torchrun: <code>accelerate launch --num_processes num_gpu training.py</code>.</p>
 <p>Refer to this <a href="https://sbert.net/docs/sentence_transformer/training/distributed.html">documentation</a> for more information.</p>
 </details>
+<details class="tip" open="open">
+<summary>Tip</summary>
+<p>PyLate now features <a href="https://x.com/tomaarsen/status/1857434642569138243">NanoBEIREvaluator</a>, an evaluator that allows to run small versions of the BEIR datasets to get an idea of the performance on BEIR without taking too long to run.</p>
+<p>To use NanoBEIREvaluator, you can simply use <code>evaluator=evaluation.NanoBEIREvaluator()</code> as an argument of the <code>SentenceTransformerTrainer</code>. You can select to run only a subset of the evaluations by specifying <code>dataset_names</code>, e.g, <code>evaluation.NanoBEIREvaluator(dataset_names=["SciFact", NFCorpus])</code></p>
+</details>
 <h2 id="knowledge-distillation-training">Knowledge Distillation Training<a class="headerlink" href="#knowledge-distillation-training" title="Permanent link">&para;</a></h2>
 <p>Training late-interaction models, such as ColBERT, has been shown to benefit from knowledge distillation compared to simpler contrastive learning approaches. Knowledge distillation training focuses on teaching ColBERT models to replicate the outputs of a more capable teacher model (e.g., a cross-encoder). This is achieved using a dataset that includes queries, documents, and the scores assigned by the teacher model to each query/document pair.</p>
 <p>Below is an example of code to run knowledge distillation training using PyLate:</p>

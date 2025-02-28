@@ -12,13 +12,13 @@
         <meta name="author" content="Raphael Sourty">
       
       
-        <link rel="canonical" href="https://lightonai.github.io/pylate/api/evaluation/evaluate/">
+        <link rel="canonical" href="https://lightonai.github.io/pylate/api/scores/SimilarityFunction/">
       
       
-        <link rel="prev" href="../PyLateInformationRetrievalEvaluator/">
+        <link rel="prev" href="../../retrieve/ColBERT/">
       
       
-        <link rel="next" href="../get-beir-triples/">
+        <link rel="next" href="../colbert-kd-scores/">
       
       
       <link rel="icon" href="../../../img/favicon.ico">
@@ -26,7 +26,7 @@
     
     
       
-        <title>evaluate - pylate</title>
+        <title>SimilarityFunction - pylate</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#evaluate" class="md-skip">
+        <a href="#similarityfunction" class="md-skip">
           Skip to content
         </a>
       
@@ -115,7 +115,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              evaluate
+              SimilarityFunction
             
           </span>
         </div>
@@ -515,290 +515,57 @@
                 
   
   
-    
   
   
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
   
-    
-    
+  
+    <a href="../../evaluation/ColBERTDistillationEvaluator/" class="md-nav__link">
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-            
   
   <span class="md-ellipsis">
     evaluation
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            evaluation
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ColBERTDistillationEvaluator/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ColBERTDistillationEvaluator
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ColBERTTripletEvaluator/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    ColBERTTripletEvaluator
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../NanoBEIREvaluator/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    NanoBEIREvaluator
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PyLateInformationRetrievalEvaluator/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    PyLateInformationRetrievalEvaluator
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+        <span class="md-nav__icon md-icon"></span>
       
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    evaluate
-  </span>
+    </a>
   
 
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  <span class="md-ellipsis">
-    evaluate
-  </span>
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../get-beir-triples/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    get_beir_triples
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../load-beir/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    load_beir
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../load-custom-dataset/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    load_custom_dataset
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
       
     </li>
   
@@ -1095,49 +862,189 @@
                 
   
   
+    
   
   
-    
-    
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
   
-  
-    <a href="../../scores/SimilarityFunction/" class="md-nav__link">
+    
+    
       
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
   
   <span class="md-ellipsis">
     scores
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            scores
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
       
-        <span class="md-nav__icon md-icon"></span>
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
-    </a>
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    SimilarityFunction
+  </span>
   
 
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    SimilarityFunction
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../colbert-kd-scores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    colbert_kd_scores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../colbert-scores-pairwise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    colbert_scores_pairwise
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../colbert-scores/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    colbert_scores
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -1239,15 +1146,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1263,48 +1161,29 @@
                   
 
 
-<h1 id="evaluate">evaluate<a class="headerlink" href="#evaluate" title="Permanent link">&para;</a></h1>
-<p>Evaluate candidates matchs.</p>
+<h1 id="similarityfunction">SimilarityFunction<a class="headerlink" href="#similarityfunction" title="Permanent link">&para;</a></h1>
+<p>Enum class for supported score functions. The following functions are supported: - <code>SimilarityFunction.MAXSIM</code> (<code>"MaxSim"</code>): Max similarity</p>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>scores</strong> (<em>'list[list[dict]]'</em>)</p>
+<p><strong>value</strong></p>
 </li>
 <li>
-<p><strong>qrels</strong> (<em>'dict'</em>)</p>
-<p>Qrels.</p>
+<p><strong>names</strong> – defaults to <code>None</code></p>
 </li>
 <li>
-<p><strong>queries</strong> (<em>'list[str]'</em>)</p>
-<p>index of queries of qrels.</p>
+<p><strong>module</strong> – defaults to <code>None</code></p>
 </li>
 <li>
-<p><strong>metrics</strong> (<em>'list | None'</em>) – defaults to <code>None</code></p>
-<p>Metrics to compute.</p>
+<p><strong>qualname</strong> – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>type</strong> – defaults to <code>None</code></p>
+</li>
+<li>
+<p><strong>start</strong> – defaults to <code>1</code></p>
 </li>
 </ul>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">pylate</span> <span class="kn">import</span> <span class="n">evaluation</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span>
-<span class="o">...</span>     <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">}],</span>
-<span class="o">...</span>     <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">}],</span>
-<span class="o">...</span> <span class="p">]</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">qrels</span> <span class="o">=</span> <span class="p">{</span>
-<span class="o">...</span>     <span class="s2">&quot;query1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-<span class="o">...</span>     <span class="s2">&quot;query2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-<span class="o">...</span> <span class="p">}</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">queries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;query1&quot;</span><span class="p">,</span> <span class="s2">&quot;query2&quot;</span><span class="p">]</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="n">results</span> <span class="o">=</span> <span class="n">evaluation</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
-<span class="o">...</span>     <span class="n">scores</span><span class="o">=</span><span class="n">scores</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">qrels</span><span class="o">=</span><span class="n">qrels</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">queries</span><span class="o">=</span><span class="n">queries</span><span class="p">,</span>
-<span class="o">...</span>     <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ndcg@10&quot;</span><span class="p">,</span> <span class="s2">&quot;hits@1&quot;</span><span class="p">],</span>
-<span class="o">...</span> <span class="p">)</span>
-</code></pre></div>
 
 
 
