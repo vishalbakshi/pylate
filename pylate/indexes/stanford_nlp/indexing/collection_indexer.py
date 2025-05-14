@@ -427,6 +427,7 @@ class CollectionIndexer:
                         f"#> Saving chunk {chunk_idx}: \t {len(doclens):,} passages "
                         f"and {embs.size(0):,} embeddings. From #{offset:,} onward."
                     )
+                torch.save(embs, "/content/pylate_embs.pt")
                 embs = torch.load("/content/colbert_embs.pt")
                 self.saver.save_chunk(
                     chunk_idx, offset, embs, doclens
