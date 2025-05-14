@@ -412,6 +412,7 @@ class CollectionIndexer:
                 doclens = [len(embds) for embds in embs]
                 # Flatten embeddings
                 embs = torch.cat([torch.tensor(emb) for emb in embs])
+                torch.save(embs, "/content/pylate_embs.pt")
                 # Cast to float16 if float32
                 if embs.dtype == torch.float32:
                     embs = embs.to(torch.float16)
