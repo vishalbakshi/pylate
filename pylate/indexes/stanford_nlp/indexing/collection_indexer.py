@@ -535,8 +535,12 @@ class CollectionIndexer:
 
             print_memory_stats(f"RANK:{self.rank}")
 
+        torch.save(codes, "/content/pylate_codes_before_sort.pt")
         codes = codes.sort()
+        torch.save(codes, "/content/pylate_codes_after_sort.pt")
         ivf, values = codes.indices, codes.values
+        torch.save(ivf, "/content/pylate_ivf_after_sort.pt")
+        torch.save(values, "/content/pylate_values_after_sort.pt")
 
         if self.verbose > 1:
             print_memory_stats(f"RANK:{self.rank}")
@@ -544,6 +548,7 @@ class CollectionIndexer:
             Run().print_main("Getting unique codes...")
 
         ivf_lengths = torch.bincount(values, minlength=self.num_partitions)
+        torch.save(ivf_lengths, "/content/pylate_ivf_lengths_after_bincount.pt")
         assert ivf_lengths.size(0) == self.num_partitions
 
         if self.verbose > 1:
