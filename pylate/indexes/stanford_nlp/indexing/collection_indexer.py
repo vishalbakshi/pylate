@@ -412,7 +412,7 @@ class CollectionIndexer:
                 doclens = [len(embds) for embds in embs]
                 # Flatten embeddings
                 embs = torch.cat([torch.tensor(emb) for emb in embs])
-                torch.save(embs, "/content/pylate_embs.pt")
+                
                 # Cast to float16 if float32
                 if embs.dtype == torch.float32:
                     embs = embs.to(torch.float16)
@@ -427,7 +427,7 @@ class CollectionIndexer:
                         f"#> Saving chunk {chunk_idx}: \t {len(doclens):,} passages "
                         f"and {embs.size(0):,} embeddings. From #{offset:,} onward."
                     )
-
+                embs = torch.load("/content/colbert_embs.pt")
                 self.saver.save_chunk(
                     chunk_idx, offset, embs, doclens
                 )  # offset = first passage index in chunk
