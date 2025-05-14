@@ -608,6 +608,7 @@ class ColBERT(SentenceTransformer):
         ):
             sentences_batch = sentences_sorted[start_index : start_index + batch_size]
             features = self.tokenize(texts=sentences_batch, is_query=is_query)
+            torch.save(features, f"/content/pylate_features_{start_index}.pt")
 
             if self.device.type == "hpu":
                 if "input_ids" in features:
