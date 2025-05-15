@@ -659,6 +659,7 @@ class ColBERT(SentenceTransformer):
             with torch.no_grad():
                 # TODO: add the truncate/sliding window logic here
                 out_features = self.forward(input=features)
+                torch.save(out_features, "/content/pylate_out_features.pt")
                 if self.device.type == "hpu":
                     out_features = copy.deepcopy(out_features)
 
