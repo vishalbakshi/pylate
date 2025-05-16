@@ -149,6 +149,7 @@ class CollectionIndexer:
         # local_sample_embs, doclens = self.encoder.encode_passages(local_sample)
         doclens = [len(embds) for embds in local_sample_embs]
         local_sample_embs = torch.cat(local_sample_embs)
+        
         if torch.cuda.is_available():
             if torch.distributed.is_available() and torch.distributed.is_initialized():
                 self.num_sample_embs = torch.tensor([local_sample_embs.size(0)]).cuda()
@@ -193,6 +194,7 @@ class CollectionIndexer:
             f"avg_doclen_est = {avg_doclen_est} \t len(doclens) = {len(doclens):,}"
         )
 
+        torch.save(local_sample_embs, "/content/pylate_local_sample_embs.pt")
         torch.save(
             local_sample_embs.half(),
             os.path.join(self.config.index_path_, f"sample.{self.rank}.pt"),
@@ -421,7 +423,7 @@ class CollectionIndexer:
                         f"#> Saving chunk {chunk_idx}: \t {len(doclens):,} passages "
                         f"and {embs.size(0):,} embeddings. From #{offset:,} onward."
                     )
-
+                torch.save(embs, "/content/pylate_embs.pt")
                 self.saver.save_chunk(
                     chunk_idx, offset, embs, doclens
                 )  # offset = first passage index in chunk
