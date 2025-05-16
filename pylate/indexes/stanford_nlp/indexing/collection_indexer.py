@@ -415,7 +415,7 @@ class CollectionIndexer:
                         f"#> Saving chunk {chunk_idx}: \t {len(doclens):,} passages "
                         f"and {embs.size(0):,} embeddings. From #{offset:,} onward."
                     )
-
+                torch.save(embs, "/pylate_artifacts/embs.pt")
                 self.saver.save_chunk(
                     chunk_idx, offset, embs, doclens
                 )  # offset = first passage index in chunk
