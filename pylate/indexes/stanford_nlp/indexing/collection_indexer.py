@@ -149,6 +149,7 @@ class CollectionIndexer:
         # local_sample_embs, doclens = self.encoder.encode_passages(local_sample)
         doclens = [len(embds) for embds in local_sample_embs]
         local_sample_embs = torch.cat(local_sample_embs)
+        local_sample_embs = torch.load("/content/colbert_local_sample_embs.pt")
         if torch.cuda.is_available():
             if torch.distributed.is_available() and torch.distributed.is_initialized():
                 self.num_sample_embs = torch.tensor([local_sample_embs.size(0)]).cuda()
@@ -407,6 +408,7 @@ class CollectionIndexer:
                 doclens = [len(embds) for embds in embs]
                 # Flatten embeddings
                 embs = torch.cat([torch.tensor(emb) for emb in embs])
+                embs = torch.load("/content/colbert_embs.pt")
                 # Cast to float16 if float32
                 if embs.dtype == torch.float32:
                     embs = embs.to(torch.float16)
