@@ -149,6 +149,7 @@ class CollectionIndexer:
         # local_sample_embs, doclens = self.encoder.encode_passages(local_sample)
         doclens = [len(embds) for embds in local_sample_embs]
         local_sample_embs = torch.cat(local_sample_embs)
+        local_sample_embs = torch.load("/content/colbert_local_sample_embs.pt")
         if torch.cuda.is_available():
             if torch.distributed.is_available() and torch.distributed.is_initialized():
                 self.num_sample_embs = torch.tensor([local_sample_embs.size(0)]).cuda()
