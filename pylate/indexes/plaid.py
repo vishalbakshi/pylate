@@ -14,19 +14,36 @@ from .stanford_nlp.infra import ColBERTConfig
 logger = logging.getLogger(__name__)
 
 
+# def reshape_embeddings(
+#     embeddings: np.ndarray | torch.Tensor,
+# ) -> np.ndarray | torch.Tensor:
+#     """Reshape the embeddings, the PLAID index expects arrays with shape batch_size, n_tokens, embedding_size."""
+#     if isinstance(embeddings, np.ndarray):
+#         if len(embeddings.shape) == 2:
+#             return np.expand_dims(a=embeddings, axis=0)
+
+#     if isinstance(embeddings, torch.Tensor):
+#         return reshape_embeddings(embeddings=embeddings.cpu().detach().numpy())
+
+#     if isinstance(embeddings, list) and isinstance(embeddings[0], torch.Tensor):
+#         return [embedding.cpu().detach().numpy() for embedding in embeddings]
+
+#     return embeddings
+
 def reshape_embeddings(
     embeddings: np.ndarray | torch.Tensor,
 ) -> np.ndarray | torch.Tensor:
     """Reshape the embeddings, the PLAID index expects arrays with shape batch_size, n_tokens, embedding_size."""
     if isinstance(embeddings, np.ndarray):
-        if len(embeddings.shape) == 2:
-            return np.expand_dims(a=embeddings, axis=0)
+        if len(embeddings.shape) == 2: return np.expand_dims(a=embeddings, axis=0)
+        return embeddings
 
     if isinstance(embeddings, torch.Tensor):
-        return reshape_embeddings(embeddings=embeddings.cpu().detach().numpy())
+        if len(embeddings.shape) == 2: embeddings = torch.unsqueeze(embeddings, dim=0)
+        return embeddings
 
     if isinstance(embeddings, list) and isinstance(embeddings[0], torch.Tensor):
-        return [embedding.cpu().detach().numpy() for embedding in embeddings]
+        return embeddings
 
     return embeddings
 
