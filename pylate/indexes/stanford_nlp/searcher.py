@@ -9,8 +9,10 @@ from pylate.indexes.stanford_nlp.infra.launcher import print_memory_stats
 from pylate.indexes.stanford_nlp.infra.run import Run
 from pylate.indexes.stanford_nlp.search.index_storage import IndexScorer
 
+from memory_profiler import profile
 
 class Searcher:
+    @profile
     def __init__(
         self,
         index,
@@ -43,9 +45,11 @@ class Searcher:
 
         print_memory_stats()
 
+    @profile
     def configure(self, **kw_args):
         self.config.configure(**kw_args)
 
+    @profile
     def search(self, Q, k=10, filter_fn=None, full_length_search=False, pids=None):
         # print("Q", Q)
         # print("Q TYPE", Q[0].dtype)
@@ -57,6 +61,7 @@ class Searcher:
         # print("Q TYPE", Q.type())
         return self.dense_search(Q, k, filter_fn=filter_fn, pids=pids)
 
+    @profile
     def dense_search(self, Q: torch.Tensor, k=10, filter_fn=None, pids=None):
         if k <= 10:
             if self.config.ncells is None:
