@@ -11,9 +11,11 @@ from .base import Base
 from .stanford_nlp import Indexer, IndexUpdater, Searcher
 from .stanford_nlp.infra import ColBERTConfig
 
+from memory_profiler import profile
+
 logger = logging.getLogger(__name__)
 
-
+@profile
 def reshape_embeddings(
     embeddings: np.ndarray | torch.Tensor,
 ) -> np.ndarray | torch.Tensor:
@@ -162,6 +164,7 @@ class PLAID(Base):
         """Load the SQLite database that maps PLAID IDs to document IDs."""
         return SqliteDict(self.plaid_ids_to_documents_ids_path, outer_stack=False)
 
+    @profile
     def add_documents(
         self,
         documents_ids: str | list[str],
