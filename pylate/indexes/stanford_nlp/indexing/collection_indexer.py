@@ -19,6 +19,8 @@ from pylate.indexes.stanford_nlp.infra.launcher import print_memory_stats
 from pylate.indexes.stanford_nlp.infra.run import Run
 from pylate.indexes.stanford_nlp.utils.utils import print_message
 
+from memory_profiler import profile
+
 use_faiss = False
 try:
     import faiss
@@ -31,7 +33,7 @@ try:
 except ImportError:
     import fastkmeans
 
-
+@profile
 def encode(config, collection, shared_lists, shared_queues, verbose: int = 3):
     encoder = CollectionIndexer(config=config, collection=collection, verbose=verbose)
     encoder.run(shared_lists)
@@ -57,7 +59,8 @@ class CollectionIndexer:
         self.saver = IndexSaver(config)
 
         print_memory_stats(f"RANK:{self.rank}")
-
+        
+    @profile
     def run(self, shared_lists):
         with torch.inference_mode():
             self.setup()  # Computes and saves plan for whole collection
@@ -76,7 +79,8 @@ class CollectionIndexer:
             self.finalize()  # Builds metadata and centroid to passage mapping
             distributed.barrier(self.rank)
             print_memory_stats(f"RANK:{self.rank}")
-
+            
+    @profile
     def setup(self):
         """
         Calculates and saves plan.json for the whole collection.
@@ -119,6 +123,7 @@ class CollectionIndexer:
 
         self._save_plan()
 
+    @profile
     def _sample_pids(self):
         num_passages = len(self.collection)
 
@@ -140,6 +145,7 @@ class CollectionIndexer:
 
         return set(sampled_pids)
 
+    @profile
     def _sample_embeddings(self, sampled_pids):
         local_pids = self.collection.enumerate(rank=self.rank)
         local_sample_embs = [
@@ -200,6 +206,7 @@ class CollectionIndexer:
 
         return avg_doclen_est
 
+    @profile
     def _try_load_plan(self):
         config = self.config
         self.plan_path = os.path.join(config.index_path_, "plan.json")
@@ -227,6 +234,7 @@ class CollectionIndexer:
         else:
             return False
 
+    @profile
     def _save_plan(self):
         if self.rank < 1:
             config = self.config
@@ -242,6 +250,7 @@ class CollectionIndexer:
 
                 f.write(ujson.dumps(d, indent=4) + "\n")
 
+    @profile
     def train(self, shared_lists):
         if self.rank > 0:
             return
@@ -270,6 +279,7 @@ class CollectionIndexer:
         )
         self.saver.save_codec(codec)
 
+    @profile
     def _concatenate_and_split_sample(self):
         print_memory_stats(f"***1*** \t RANK:{self.rank}")
 
@@ -304,6 +314,7 @@ class CollectionIndexer:
 
         return sample, sample_heldout
 
+    @profile
     def _train_kmeans(self, sample, shared_lists):
         if self.use_gpu:
             torch.cuda.empty_cache()
@@ -338,6 +349,7 @@ class CollectionIndexer:
 
         return centroids
 
+    @profile
     def _compute_avg_residual(self, centroids, heldout):
         compressor = ResidualCodec(
             config=self.config, centroids=centroids, avg_residual=None
@@ -384,6 +396,7 @@ class CollectionIndexer:
         # sample_reconstruct = get_centroids_for(centroids, sample)
         # sample_avg_residual = (sample - sample_reconstruct).mean(dim=0)
 
+    @profile
     def index(self):
         """
         Encode embeddings for all passages in collection.
@@ -427,6 +440,7 @@ class CollectionIndexer:
                 )  # offset = first passage index in chunk
                 del embs, doclens
 
+    @profile
     def finalize(self):
         """
         Aggregates and stores metadata for each chunk and the whole index
@@ -448,6 +462,7 @@ class CollectionIndexer:
         self._build_ivf()
         self._update_metadata()
 
+    @profile
     def _check_all_files_are_saved(self):
         if self.verbose > 1:
             Run().print_main("#> Checking all files were saved...")
@@ -461,6 +476,7 @@ class CollectionIndexer:
             if self.verbose > 1:
                 Run().print_main("Found all files!")
 
+    @profile
     def _collect_embedding_id_offset(self):
         passage_offset = 0
         embedding_offset = 0
@@ -493,6 +509,7 @@ class CollectionIndexer:
         self.num_embeddings = embedding_offset
         assert len(self.embedding_offsets) == self.num_chunks
 
+    @profile
     def _build_ivf(self):
         # Maybe we should several small IVFs? Every 250M embeddings, so that's every 1 GB.
         # It would save *memory* here and *disk space* regarding the int64.
@@ -554,6 +571,7 @@ class CollectionIndexer:
         # Transforms centroid->embedding ivf to centroid->passage ivf
         _, _ = optimize_ivf(ivf, ivf_lengths, self.config.index_path_)
 
+    @profile
     def _update_metadata(self):
         config = self.config
         self.metadata_path = os.path.join(config.index_path_, "metadata.json")
@@ -569,7 +587,7 @@ class CollectionIndexer:
 
             f.write(ujson.dumps(d, indent=4) + "\n")
 
-
+@profile
 def compute_faiss_kmeans(
     dim, num_partitions, kmeans_niters, shared_lists, return_value_queue=None
 ):
